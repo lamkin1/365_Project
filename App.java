@@ -26,5 +26,24 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+    
+    public static void insertSong(String title, String date, int artist_id, int duration, int genre_id, String URL) {
+        
+    }
+    public static void insertArtist(String name) {
+        
+    }
+    public static void insertGenre(String genre) {
+        
+    }
+    public static void insertAlbum(String name, int artist_id) {
+        
+    }
+    public static void insertPlaylist(String playlist_name, String creation_date) {
+        
+    }
+    public static void addSongToPlaylist(int song_id, int playlist_id) {
+        
+    }
 
 }
