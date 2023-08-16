@@ -21,7 +21,6 @@ CREATE TABLE Albums (
 CREATE TABLE Songs (
 	id INT AUTO_INCREMENT,
     song_title varchar(50) NOT NULL,
-    release_date DATE NOT NULL,
     artist_id INT NOT NULL,
     album_id INT,
     duration INT NOT NULL,
@@ -49,3 +48,10 @@ CREATE TABLE PlaylistSongs (
     FOREIGN KEY(song_id) REFERENCES Songs(id)
 );
 
+
+drop table PlaylistSongs;
+drop table Playlists;
+drop table Songs;
+drop table Albums;
+drop table Genres;
+drop table Artists;
