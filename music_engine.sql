@@ -10,6 +10,12 @@ CREATE TABLE Genres (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE Eras (
+    id INT AUTO_INCREMENT,
+    era varchar(8) NOT NULL,
+    PRIMARY KEY (id)
+)
+
 CREATE TABLE Albums (
 	id INT AUTO_INCREMENT,
     album_name varchar(50) NOT NULL,
