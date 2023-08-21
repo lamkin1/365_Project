@@ -6,7 +6,6 @@ package com.mycompany.csc365p1;
 
 import java.sql.*;
 import java.util.ArrayList;
-import com.mycompany.csc365p1.DatabaseConnection;
 
 /**
  *
