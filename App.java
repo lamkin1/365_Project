@@ -17,18 +17,8 @@ public class App extends Application {
         SQLInitializer init = new SQLInitializer();
         //init.initialize();
         
-        /*-----------TESTS---------------*/
-        dbConn.insertArtist("Eminem"); //id 1
-        dbConn.insertGenre("2000s"); //id 1
-        dbConn.insertSong("Lose Yourself", 1, 265, 1); //id 1
-        if (dbConn.selectArtistByName("Eminem") == 1) System.out.println("Select artist by name is functional.");
-        else System.out.println("ERROR: Select artist by name IS NOT functional!");
-        if (dbConn.selectSongByTitle("Lose Yourself") == 1) System.out.println("Select song by title is functional.");
-        else System.out.println("ERROR: Select song by title IS NOT functional!");
-        if (dbConn.selectGenreByName("2000s") == 1) System.out.println("Select genre by name is functional.");
-        else System.out.println("ERROR: Select genre by name IS NOT functional!");
-        /*------------------------------*/
-        
+        //test(dbConn);
+
         TitleScreen titleScreen = new TitleScreen(WIDTH, HEIGHT);
 
         Scene scene = new Scene(titleScreen.getRoot(), WIDTH, HEIGHT);
@@ -38,5 +28,17 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    private void test(DatabaseConnection dbConn) {
+        dbConn.insertArtist("Eminem"); //id 1
+        dbConn.insertGenre("2000s"); //id 1
+        dbConn.insertSong("Lose Yourself", 1, 265, 1); //id 1
+        if (dbConn.selectArtistByName("Eminem") == 1) System.out.println("Select artist by name is functional.");
+        else System.out.println("ERROR: Select artist by name IS NOT functional!");
+        if (dbConn.selectSongByTitle("Lose Yourself") == 1) System.out.println("Select song by title is functional.");
+        else System.out.println("ERROR: Select song by title IS NOT functional!");
+        if (dbConn.selectGenreByName("2000s") == 1) System.out.println("Select genre by name is functional.");
+        else System.out.println("ERROR: Select genre by name IS NOT functional!");
     }
 }
