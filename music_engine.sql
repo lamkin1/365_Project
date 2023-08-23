@@ -1,57 +1,52 @@
 CREATE TABLE Artists (
-	id INT AUTO_INCREMENT,
     artist_name varchar(50) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (artist_name)
 );
 
 CREATE TABLE Genres (
-	id INT AUTO_INCREMENT,
     genre_name varchar(50) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (genre_name)
 );
 
 CREATE TABLE Eras (
-    id INT AUTO_INCREMENT,
     era varchar(8) NOT NULL,
-    PRIMARY KEY (id)
-)
+    PRIMARY KEY (era)
+);
 
 CREATE TABLE Albums (
-	id INT AUTO_INCREMENT,
     album_name varchar(50) NOT NULL,
-    artist_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY(artist_id) REFERENCES Artists(id)
+    artist varchar(50) NOT NULL,
+    PRIMARY KEY (album_name, artist),
+    FOREIGN KEY(artist) REFERENCES Artists(artist_name)
 );
 
 CREATE TABLE Songs (
-	id INT AUTO_INCREMENT,
     song_title varchar(50) NOT NULL,
-    artist_id INT NOT NULL,
-    album_id INT,
+    artist varchar(50) NOT NULL,
+    album varchar(50) NOT NULL,
     duration INT NOT NULL,
-    genre_id INT NOT NULL,
+    genre INT NOT NULL,
+    era varchar(8) NOT NULL,
     url varchar(100),
-    FOREIGN KEY (artist_id) REFERENCES Artists(id),
-    FOREIGN KEY (album_id) REFERENCES Albums(id),
-    FOREIGN KEY (genre_id) REFERENCES Genres(id),
-    PRIMARY KEY (id)
+    FOREIGN KEY (artist) REFERENCES Artists(artist_name),
+    FOREIGN KEY (album) REFERENCES Albums(album_name),
+    FOREIGN KEY (genre) REFERENCES Genres(genre_name),
+    FOREIGN KEY (era) REFERENCES Eras(era),
+    PRIMARY KEY (song_title, artist)
 );
 
 CREATE TABLE Playlists (
-	id INT AUTO_INCREMENT,
     playlist_name varchar(50) NOT NULL,
     date_created DATE NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (playlist_name)
 );
 
 CREATE TABLE PlaylistSongs (
-	id INT AUTO_INCREMENT,
-    playlist_id INT NOT NULL,
-    song_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY(playlist_id) REFERENCES Playlists(id),
-    FOREIGN KEY(song_id) REFERENCES Songs(id)
+    playlist varchar(50) NOT NULL,
+    song varchar(50) NOT NULL,
+    PRIMARY KEY (playlist),
+    FOREIGN KEY(playlist) REFERENCES Playlists(playlist_name),
+    FOREIGN KEY(song) REFERENCES Songs(song_title)
 );
 
 
@@ -60,4 +55,5 @@ drop table Playlists;
 drop table Songs;
 drop table Albums;
 drop table Genres;
+drop table Eras;
 drop table Artists;
