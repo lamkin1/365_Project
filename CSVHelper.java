@@ -39,7 +39,7 @@ public class CSVHelper {
                     + ", Era: " + info.get(4)
                     + ", Duration: " + (int)Math.ceil(Double.parseDouble(info.get(2)))
             );
-            //dbconn.insertSong();
+            //dbconn.insertSong(info.get(3),info.get(1), info.get(2), (int)Math.ceil(Double.parseDouble(info.get(2))), info.get(5), info.get(4));
         }
     }
 

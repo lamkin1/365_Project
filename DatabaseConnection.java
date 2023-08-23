@@ -127,20 +127,21 @@ class DatabaseConnection {
         return -1;
     }
 
-    public void insertSong(String title, int artist_id, int album_id, int duration, int genre_id, String URL) {
+    public void insertSong(String title, String artist, String album, int duration, String genre, String era, String URL) {
         try {
             //auto commit might just work instead of manually committing after each insert
             //connection.setAutoCommit(false);
 
             //id, song_title, artist_id, album_id, duration(int), genre_id, url(varchar)
-            String insertString = "INSERT INTO Songs (song_title, artist_id, album_id, duration, genre_id, url) VALUES (?,?,?,?,?,?)";
+            String insertString = "INSERT INTO Songs (song_title, artist, album, duration, genre, era, url) VALUES (?,?,?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
-            insertStmt.setInt(2, artist_id);
-            insertStmt.setInt(3, album_id);
+            insertStmt.setString(2, artist);
+            insertStmt.setString(3, album);
             insertStmt.setInt(4, duration);
-            insertStmt.setInt(5, genre_id);
-            insertStmt.setString(6, URL);
+            insertStmt.setString(5, genre);
+            insertStmt.setString(6, era);
+            insertStmt.setString(7, URL);
             insertStmt.executeUpdate();
             //connection.commit();
             insertStmt.close();
@@ -150,7 +151,7 @@ class DatabaseConnection {
         }
     }
     //no URL constructor
-    public void insertSong(String title, int artist_id, int album_id, int duration, int genre_id) {
+    public void insertSong(String title, String artist, String album, int duration, String genre, String era) {
         try {
             //auto commit might just work instead of manually committing after each insert
             //connection.setAutoCommit(false);
@@ -159,10 +160,11 @@ class DatabaseConnection {
             String insertString = "INSERT INTO Songs (song_title, artist_id, album_id, duration, genre_id) VALUES (?,?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
-            insertStmt.setInt(2, artist_id);
-            insertStmt.setInt(3, album_id);
+            insertStmt.setString(2, artist);
+            insertStmt.setString(3, album);
             insertStmt.setInt(4, duration);
-            insertStmt.setInt(5, genre_id);
+            insertStmt.setString(5, genre);
+            insertStmt.setString(6, era);
             insertStmt.executeUpdate();
             //connection.commit();
             insertStmt.close();
