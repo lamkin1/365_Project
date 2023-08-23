@@ -1,12 +1,8 @@
 package com.mycompany.csc365p1;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  *
@@ -23,9 +19,6 @@ class TitleScreen {
         this.height = height;
 
         root = new VBox();
-        root.setAlignment(Pos.CENTER);
-        root.setSpacing(0.03125 * this.height);
-        root.setFillWidth(true);
 
         addChildren();
     }
@@ -33,20 +26,29 @@ class TitleScreen {
     void addChildren() {
         root.getChildren().removeAll();
 
-        List<Button> buttons = Arrays.asList(
-                new Button("Songs"),
-                new Button("Artists"),
-                new Button("Albums"),
-                new Button("Genres"),
-                new Button("Playlists")
-        );
+        TabPane tabPane = new TabPane();
 
-        for (Button button: buttons) {
-            button.setMaxWidth(0.8 * this.width);
-            button.setStyle(String.format("-fx-font-size: %d", Math.round(0.046875 * this.width)));
-            button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
-            root.getChildren().add(button);
-        }
+        Tab songsTab = new Tab("Songs");
+        songsTab.setClosable(false);
+
+        SongPane songPane = new SongPane();
+        songsTab.setContent(songPane.getRoot());
+
+        Tab artistsTab = new Tab("Artists");
+        artistsTab.setClosable(false);
+
+        Tab albumsTab = new Tab("Albums");
+        albumsTab.setClosable(false);
+
+        Tab genresTab = new Tab("Genres");
+        genresTab.setClosable(false);
+
+        Tab playlistsTab = new Tab("Playlists");
+        playlistsTab.setClosable(false);
+
+        tabPane.getTabs().addAll(songsTab, artistsTab, albumsTab, genresTab, playlistsTab);
+
+        root.getChildren().addAll(tabPane);
     }
 
     public VBox getRoot() {
