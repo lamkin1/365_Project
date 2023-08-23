@@ -44,7 +44,7 @@ CREATE TABLE Playlists (
 CREATE TABLE PlaylistSongs (
     playlist varchar(50) NOT NULL,
     song varchar(50) NOT NULL,
-    PRIMARY KEY (playlist),
+    PRIMARY KEY (playlist, song),
     FOREIGN KEY(playlist) REFERENCES Playlists(playlist_name),
     FOREIGN KEY(song) REFERENCES Songs(song_title)
 );
