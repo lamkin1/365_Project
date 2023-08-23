@@ -1,7 +1,5 @@
 package com.mycompany.csc365p1;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -17,17 +15,11 @@ public class SongPane {
         addChildren();
     }
 
-    void addChildren() {
-        root.getChildren().removeAll();
+    public void addChildren() {
+        root.getChildren().clear();
 
         Button addSongButton = new Button("Add song");
-        addSongButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                System.out.println("Called");
-                showAddSongPane();
-            }
-        });
+        addSongButton.setOnAction(actionEvent -> showAddSongPane());
         Button modifySongButton = new Button("Modify song");
         Button findSongButton = new Button("Find song");
 
@@ -35,9 +27,8 @@ public class SongPane {
     }
 
     void showAddSongPane() {
-        root.getChildren().removeAll();
-
-        AddSongPane addSongPane = new AddSongPane();
+        root.getChildren().clear();
+        AddSongPane addSongPane = new AddSongPane(this);
         root.getChildren().addAll(addSongPane.getRoot());
     }
 

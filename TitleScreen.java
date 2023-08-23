@@ -24,7 +24,7 @@ class TitleScreen {
     }
 
     void addChildren() {
-        root.getChildren().removeAll();
+        root.getChildren().clear();
 
         TabPane tabPane = new TabPane();
 

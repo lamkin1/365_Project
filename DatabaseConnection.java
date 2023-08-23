@@ -1,5 +1,7 @@
 package com.mycompany.csc365p1;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import java.sql.*;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ class DatabaseConnection {
             Class.forName("com.mysql.jdbc.Driver");
             //Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://ambari-node5.csc.calpoly.edu:3306/dlching", "dlching", "028545432");
+                    "jdbc:mysql://ambari-node5.csc.calpoly.edu:3306/gr0up0", "gr0up0", "test123");
             //    "jdbc:mysql://ambari-node5.csc.calpoly.edu:3306/ssponsle", "ssponsle", "028858030");
             //            "jdbc:mysql://localhost:3306/test", "root", "123")
 
@@ -189,6 +191,20 @@ class DatabaseConnection {
         catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    //no URL + no album constructor
+    public void insertSong(String title, String artist) throws SQLException {
+        //auto commit might just work instead of manually committing after each insert
+        //connection.setAutoCommit(false);
+
+        //id, song_title, artist_id, album_id, duration(int), genre_id, url(varchar)
+        String insertString = "INSERT INTO Songs (song_title, artist) VALUES (?,?)";
+        PreparedStatement insertStmt = connection.prepareStatement(insertString);
+        insertStmt.setString(1, title);
+        insertStmt.setString(2, artist);
+        insertStmt.executeUpdate();
+        //connection.commit();
+        insertStmt.close();
     }
 
     public void insertArtist(String name) {
