@@ -17,6 +17,8 @@ public class App extends Application {
     public void start(Stage stage) {
         dbConn = new DatabaseConnection();
         SQLInitializer init = new SQLInitializer();
+        CSVHelper csvh = new CSVHelper(dbConn);
+        csvh.importSongs();
         //init.initialize();
         
         //test(dbConn);

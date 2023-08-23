@@ -218,7 +218,6 @@ id,Artist,Duration,Song Title,Decade,Genre,Album
 217,Diana Ross,213.30621,Upside Down,1980s,Pop,Diana
 218,Whitney Houston,314.39955,I Wanna Dance With Somebody,1980s,Pop,Whitney
 219,The Human League,239.09832,Don't You Want Me,1980s,Electronic,Dare
-220,"Lipps, Inc.",466.41333,Funkytown,1980s,Disco,Mouth to Mouth
 221,Michael Jackson,296.70354,Beat It,1980s,Pop,Thriller
 222,Blondie,479.86893,Call Me,1980s,New Wave,American Gigolo Soundtrack
 223,Paul McCartney,228.78621,Ebony And Ivory,1980s,Pop,Tug of War
@@ -447,155 +446,154 @@ id,Artist,Duration,Song Title,Decade,Genre,Album
 446,Gigliola Cinquetti,196.51918,Non Ho L'eta' ( Per Amarti ),1960s,Pop,Non ho l'età
 447,Sam the Sham & The Pharaohs,140.74667,Wooly Bully,1960s,Rock,Wooly Bully
 448,The Rolling Stones,134.77333,Paint It Black,1960s,Rock,Aftermath
-449,Scott McKenzie,179.30667,San Francisco (Be Sure to Wear Flowers in Your Hair),1960s,Pop,San Francisco Be Sure to Wear Flowers in Your Hair
+449,Scott McKenzie,179.30667,San Francisco (Be Sure to Wear Flowers in Your Hair),1960s,Pop,The Voice Of Scott McKenzie
 450,Chris Montez,30.06649,Let's Dance,1960s,Rock,Let's Dance
-451,Elvis Presley,304.26667,Suspicious Minds,1960s,Rock,Suspicious Minds
+451,Elvis Presley,304.26667,Suspicious Minds,1960s,Rock,From Elvis in Memphis
 452,The Byrds,148.90667,Mr. Tambourine Man,1960s,Rock,Mr. Tambourine Man
 453,The Drifters,135.46667,Save The Last Dance For Me,1960s,R&B,Save The Last Dance For Me
-454,Simon & Garfunkel,273.28,The Sounds Of Silence,1960s,Folk Rock,The Sounds Of Silence
-455,Elvis Presley,183.82322,In The Ghetto,1960s,Rock,In The Ghetto
-456,Paul+Paula,153.63955,Hey Paula,1960s,Pop,Hey Paula
-457,Rick Nelson,136,Hello Mary Lou,1960s,Rock,Hello Mary Lou
-458,Del Shannon,139.37333,Runaway,1960s,Rock,Runaway
-459,The Beatles,131.65714,Can't Buy Me Love,1960s,Rock,Can't Buy Me Love
-460,The Beatles,258.45655,Come Together,1960s,Rock,Come Together
-461,Elvis Presley,61.92,Wooden Heart,1960s,Rock,Wooden Heart
-462,The Beatles Sing Alongs,182.30621,The Ballad Of John & Yoko,1960s,Rock,The Ballad Of John & Yoko
-463,Sam Cooke,125.18812,Wonderful World,1960s,R&B,Wonderful World
-464,The Rolling Stones,220.3439,Jumpin' Jack Flash,1960s,Rock,Jumpin' Jack Flash
-465,Edwin Hawkins Singers,302.57288,Oh Happy Day,1960s,Gospel,Oh Happy Day
-466,The Box Tops,112.87029,The Letter,1960s,Rock,The Letter
-467,The Mamas & The Papas,204.5341,Monday Monday,1960s,Pop,Monday Monday
-468,The Monkees,164.54485,Daydream Believer,1960s,Pop,Daydream Believer
-469,Sandie Shaw,141.98667,Puppet On A String,1960s,Pop,Puppet On A String
+454,Simon & Garfunkel,273.28,The Sounds Of Silence,1960s,Folk Rock,Wednesday Morning, 3 A.M.
+455,Elvis Presley,183.82322,In The Ghetto,1960s,Rock,From Elvis in Memphis
+456,Paul+Paula,153.63955,Hey Paula,1960s,Pop,Singles A's & B's
+457,Rick Nelson,136,Hello Mary Lou,1960s,Rock,Single
+458,Del Shannon,139.37333,Runaway,1960s,Rock,Runaway with Del Shannon
+459,The Beatles,131.65714,Can't Buy Me Love,1960s,Rock,A Hard Day's Night
+460,The Beatles,258.45655,Come Together,1960s,Rock,Abbey Road
+461,Elvis Presley,61.92,Wooden Heart,1960s,Rock,G.I. Blues
+462,The Beatles Sing Alongs,182.30621,The Ballad Of John & Yoko,1960s,Rock,Single
+463,Sam Cooke,125.18812,Wonderful World,1960s,R&B,The Best of Sam Cooke
+464,The Rolling Stones,220.3439,Jumpin' Jack Flash,1960s,Rock,Single
+465,Edwin Hawkins Singers,302.57288,Oh Happy Day,1960s,Gospel,Let Us Go Into the House of the Lord
+466,The Box Tops,112.87029,The Letter,1960s,Rock,The Letter/Neon Rainbow
+467,The Mamas & The Papas,204.5341,Monday Monday,1960s,Pop,If You Can Believe Your Eyes and Ears
+468,The Monkees,164.54485,Daydream Believer,1960s,Pop,The Birds, The Bees & The Monkees
+469,Sandie Shaw,141.98667,Puppet On A String,1960s,Pop,Puppet on a String
 470,Nini Rosso,186.41333,Il silenzio,1960s,Instrumental,Il silenzio
-471,The Righteous Brothers,220.89333,You've Lost That Lovin' Feelin',1960s,R&B,You've Lost That Lovin' Feelin'
+471,The Righteous Brothers,220.89333,You've Lost That Lovin' Feelin',1960s,R&B,Just Once in My Life
 472,Tommy James & The Shondells,204.58621,Crimson & Clover,1960s,Rock,Crimson & Clover
-473,Elvis Presley,183.40526,Can't Help Falling In Love,1960s,Rock,Can't Help Falling In Love
+473,Elvis Presley,183.40526,Can't Help Falling In Love,1960s,Rock,Blue Hawaii
 474,Tom Jones,164.64,Delilah,1960s,Pop,Delilah
 475,Barry Ryan,344.89333,Eloise,1960s,Pop,Eloise
-476,Roy Orbison,156.8537,Only the Lonely,1960s,Rock,Only the Lonely
-477,The Doors,429.76,Light My Fire,1960s,Rock,Light My Fire
-478,The Beatles,136.82621,Lady Madonna,1960s,Rock,Lady Madonna
-479,The Rolling Stones,173.77333,Get Off Of My Cloud,1960s,Rock,Get Off Of My Cloud
-480,The Ronettes,153.61288,Be My Baby,1960s,Pop,Be My Baby
-481,Otis Redding,163.75578,(Sittin' On) The Dock Of The Bay,1960s,R&B,(Sittin' On) The Dock Of The Bay
-482,Little Eva,108.08889,The Loco-Motion,1960s,R&B,The Loco-Motion
-483,The Rolling Stones,189.68,The Last Time,1960s,Rock,The Last Time
-484,Louis Armstrong,152.50667,Hello Dolly,1960s,Jazz,Hello Dolly
-485,Bobby Vinton,227.43946,Roses are Red,1960s,Pop,Roses are Red
-486,Elvis Presley,25.05098,Stuck on You,1960s,Rock,Stuck on You
+476,Roy Orbison,156.8537,Only the Lonely,1960s,Rock,Lonely and Blue
+477,The Doors,429.76,Light My Fire,1960s,Rock,The Doors
+478,The Beatles,136.82621,Lady Madonna,1960s,Rock,Single
+479,The Rolling Stones,173.77333,Get Off Of My Cloud,1960s,Rock,Single
+480,The Ronettes,153.61288,Be My Baby,1960s,Pop,Presenting the Fabulous Ronettes Featuring Veronica
+481,Otis Redding,163.75578,(Sittin' On) The Dock Of The Bay,1960s,R&B,The Dock of the Bay
+482,Little Eva,108.08889,The Loco-Motion,1960s,R&B,Loco Motion
+483,The Rolling Stones,189.68,The Last Time,1960s,Rock,Single
+484,Louis Armstrong,152.50667,Hello Dolly,1960s,Jazz,Hello, Dolly!
+485,Bobby Vinton,227.43946,Roses are Red,1960s,Pop,Roses Are Red
+486,Elvis Presley,25.05098,Stuck on You,1960s,Rock,Elvis Is Back!
 487,The Marcels,136.96,Blue Moon,1960s,Doo-Wop,Blue Moon
-488,The Fifth Dimension,294.85714,"Aquarius / Let the Sunshine In (The Flesh Failures)",1960s,Pop,Aquarius  Let the Sunshine In (The Flesh Failures)
-489,Nancy Sinatra,228.78041,Somethin' Stupid (with Frank Sinatra),1960s,Pop,Somethin' Stupid (with Frank Sinatra)
-490,John Fred & His Playboy Band,171.86667,Judy In Disguise,1960s,Rock,Judy In Disguise
-491,Creedence Clearwater Revival,248.68,Proud Mary,1960s,Rock,Proud Mary
-492,The Beatles,248.93288,Strawberry Fields Forever,1960s,Rock,Strawberry Fields Forever
-493,Elvis Presley,123.94463,She's Not You,1960s,Rock,She's Not You
+488,The Fifth Dimension,294.85714,Aquarius / Let the Sunshine In (The Flesh Failures),1960s,Pop,The Age of Aquarius
+489,Nancy Sinatra,228.78041,Somethin' Stupid (with Frank Sinatra),1960s,Pop,Nancy & Lee
+490,John Fred & His Playboy Band,171.86667,Judy In Disguise,1960s,Rock,Single
+491,Creedence Clearwater Revival,248.68,Proud Mary,1960s,Rock,Bayou Country
+492,The Beatles,248.93288,Strawberry Fields Forever,1960s,Rock,Magical Mystery Tour
+493,Elvis Presley,123.94463,She's Not You,1960s,Rock,Single
 494,The Supremes,160.66667,Where Did Our Love Go,1960s,R&B,Where Did Our Love Go
-495,Kingsmen,124.55764,Louie Louie,1960s,Rock,Louie Louie
-496,The Beatles,160.75859,Michelle,1960s,Rock,Michelle
-497,Ned Miller,131.30503,From A Jack To A King,1960s,Country,From A Jack To A King
-498,Tom Jones,150.76571,Green Green Grass of Home,1960s,Pop,Green Green Grass of Home
-499,Bob Dylan,186.65288,Like a Rolling Stone,1960s,Rock,Like a Rolling Stone
-500,The Beach Boys,186.86667,Sloop John B,1960s,Rock,Sloop John B
-501,Bill Haley & His Comets,138.50621,Rock Around The Clock,1950s,Rock Around The Clock
+495,Kingsmen,124.55764,Louie Louie,1960s,Rock,The Kingsmen
+496,The Beatles,160.75859,Michelle,1960s,Rock,Rubber Soul
+497,Ned Miller,131.30503,From A Jack To A King,1960s,Country,From a Jack to a King
+498,Tom Jones,150.76571,Green Green Grass of Home,1960s,Pop,Green, Green Grass of Home
+499,Bob Dylan,186.65288,Like a Rolling Stone,1960s,Rock,Highway 61 Revisited
+500,The Beach Boys,186.86667,Sloop John B,1960s,Rock,Pet Sounds
 502,Elvis Presley,98.05333,Jailhouse Rock,1950s,Rock,Jailhouse Rock
-503,Jo Stafford,92.86,You Belong to Me,1950s,Pop,You Belong to Me
-504,Doris Day,128.33333,"Que Sera  Sera",1950s,Pop,Que Sera  Sera
-505,Bobby Darin,187.12376,Mack The Knife,1950s,Pop,Mack The Knife
-506,The Kingston Trio,148.66667,Tom Dooley,1950s,Folk,Tom Dooley
-507,Anton Karas,131.21333,The Third Man Theme,1950s,Soundtrack,The Third Man Theme
-508,Al Martino,192.45333,Here In My Heart,1950s,Pop,Here In My Heart
-509,Les Paul & Mary Ford,173.24245,Vaya Con Dios,1950s,Jazz,Vaya Con Dios
-510,Fats Domino,30.06649,Blueberry Hill,1950s,Rock,Blueberry Hill
-511,The Chordettes,155.79429,Mister Sandman,1950s,Doo-Wop,Mister Sandman
-512,Nat King Cole,30.06649,Mona Lisa,1950s,Jazz,Mona Lisa
-513,Nat King Cole,268.94667,Too Young,1950s,Jazz,Too Young
-514,Vera Lynn,157.26667,Auf Wiedersehn Sweetheart,1950s,Pop,Auf Wiedersehn Sweetheart
-515,Tennessee Ernie Ford,156.21288,Sixteen Tons,1950s,Country,Sixteen Tons
+503,Jo Stafford,92.86,You Belong to Me,1950s,Pop,Starring Jo Stafford
+504,Doris Day,128.33333,Que Sera, Sera,1950s,Pop,Day by Day / Day by Night
+505,Bobby Darin,187.12376,Mack The Knife,1950s,Pop,That's All
+506,The Kingston Trio,148.66667,Tom Dooley,1950s,Folk,The Kingston Trio
+507,Anton Karas,131.21333,The Third Man Theme,1950s,Soundtrack,The Third Man
+508,Al Martino,192.45333,Here In My Heart,1950s,Pop,Here in My Heart
+509,Les Paul & Mary Ford,173.24245,Vaya Con Dios,1950s,Jazz,Les Paul & Mary Ford's Greatest Hits
+510,Fats Domino,30.06649,Blueberry Hill,1950s,Rock,This Is Fats Domino!
+511,The Chordettes,155.79429,Mister Sandman,1950s,Doo-Wop,Drifting and Dreaming
+512,Nat King Cole,30.06649,Mona Lisa,1950s,Jazz,The Nat King Cole Story
+513,Nat King Cole,268.94667,Too Young,1950s,Jazz,Unforgettable
+514,Vera Lynn,157.26667,Auf Wiedersehn Sweetheart,1950s,Pop,We'll Meet Again
+515,Tennessee Ernie Ford,156.21288,Sixteen Tons,1950s,Country,16 Tons
 516,The Crew Cuts,163.3171,Sh-Boom,1950s,Doo-Wop,Sh-Boom
-517,Jerry Lee Lewis,111.17506,Great Balls of Fire,1950s,Rock,Great Balls of Fire
-518,The Platters,154.56,Only You,1950s,Doo-Wop,Only You
-519,Nat King Cole,30.06649,Unforgettable,1950s,Jazz,Unforgettable
-520,Perry Como,92.69333,Don't Let The Stars Get In Your Eyes,1950s,Pop,Don't Let The Stars Get In Your Eyes
-521,Patti Page,181.59583,Tennessee Waltz,1950s,Country,Tennessee Waltz
-522,Elvis Presley,30.06649,Heartbreak Hotel,1950s,Rock,Heartbreak Hotel
-523,Doris Day,109.18998,Secret Love,1950s,Pop,Secret Love
-524,Domenico Modugno,152.88,Volare,1950s,Pop,Volare
-525,Gordon Jenkins & the Weavers,202.25333,Goodnight Irene  Goodnight,1950s,Folk,Goodnight Irene  Goodnight
-526,Kitty Kallen,89.14998,Little Things Mean a Lot,1950s,Pop,Little Things Mean a Lot
-527,Elvis Presley,143.61333,Hound Dog,1950s,Rock,Hound Dog
-528,PÍ©rez Prado,147.55955,Cherry Pink,1950s,Latin,Cherry Pink
-529,Buddy Holly,30.06649,That'll Be the Day,1950s,Rock,That'll Be the Day
+517,Jerry Lee Lewis,111.17506,Great Balls of Fire,1950s,Rock,Jerry Lee Lewis
+518,The Platters,154.56,Only You,1950s,Doo-Wop,The Platters
+519,Nat King Cole,30.06649,Unforgettable,1950s,Jazz,The Nat King Cole Story
+520,Perry Como,92.69333,Don't Let The Stars Get In Your Eyes,1950s,Pop,Don't Let the Stars Get In Your Eyes
+521,Patti Page,181.59583,Tennessee Waltz,1950s,Country,Patti Page's Greatest Hits
+522,Elvis Presley,30.06649,Heartbreak Hotel,1950s,Rock,Elvis' Golden Records
+523,Doris Day,109.18998,Secret Love,1950s,Pop,Love Me or Leave Me
+524,Domenico Modugno,152.88,Volare,1950s,Pop,Ciao, Domenico!
+525,Gordon Jenkins & the Weavers,202.25333,Goodnight Irene  Goodnight,1950s,Folk,The Weavers' Greatest Hits
+526,Kitty Kallen,89.14998,Little Things Mean a Lot,1950s,Pop,My Coloring Book
+527,Elvis Presley,143.61333,Hound Dog,1950s,Rock,Elvis' Golden Records
+528,PÍ©rez Prado,147.55955,Cherry Pink,1950s,Latin,Cherry Pink and Apple Blossom White
+529,Buddy Holly,30.06649,That'll Be the Day,1950s,Rock,Buddy Holly
 530,Paul Anka,172.51156,Diana,1950s,Pop,Diana
-531,Elvis Presley,118.33469,All Shook Up,1950s,Rock,All Shook Up
-532,Elvis Presley,159.45247,Don't Be Cruel,1950s,Rock,Don't Be Cruel
-533,Johnnie Ray,184.23873,Cry,1950s,Pop,Cry
-534,The Platters,156.07955,Smoke Gets in Your Eyes,1950s,Doo-Wop,Smoke Gets in Your Eyes
-535,Harry Belafonte,176.33134,The Banana Boat Song,1950s,Calypso,The Banana Boat Song
-536,Tony Bennett,186.27837,Stranger In Paradise,1950s,Jazz,Stranger In Paradise
+531,Elvis Presley,118.33469,All Shook Up,1950s,Rock,Elvis' Golden Records
+532,Elvis Presley,159.45247,Don't Be Cruel,1950s,Rock,Elvis' Golden Records
+533,Johnnie Ray,184.23873,Cry,1950s,Pop,The Big Beat
+534,The Platters,156.07955,Smoke Gets in Your Eyes,1950s,Doo-Wop,The Platters
+535,Harry Belafonte,176.33134,The Banana Boat Song,1950s,Calypso,Calypso
+536,Tony Bennett,186.27837,Stranger In Paradise,1950s,Jazz,To My Wonderful One
 537,Elvis Presley,148.44,A Fool Such As I,1950s,Rock,A Fool Such As I
-538,Pat Boone,30.06649,Love Letters in the Sand,1950s,Pop,Love Letters in the Sand
-539,Eddie Fisher,186.34667,I'm Walking Behind You,1950s,Pop,I'm Walking Behind You
-540,Les Paul & Mary Ford,63,How High the Moon,1950s,Jazz,How High the Moon
-541,Don Cornell,166.73333,Hold My Hand,1950s,Pop,Hold My Hand
-542,The Platters,198.16,The Great Pretender,1950s,Doo-Wop,The Great Pretender
+538,Pat Boone,30.06649,Love Letters in the Sand,1950s,Pop,Pat Boone's Greatest Hits
+539,Eddie Fisher,186.34667,I'm Walking Behind You,1950s,Pop,Eddie Fisher's Greatest Hits
+540,Les Paul & Mary Ford,63,How High the Moon,1950s,Jazz,The Best of Les Paul and Mary Ford
+541,Don Cornell,166.73333,Hold My Hand,1950s,Pop,Most Of All
+542,The Platters,198.16,The Great Pretender,1950s,Doo-Wop,The Magic Touch
 543,Phil Harris,141.36,The Thing,1950s,Novelty,The Thing
-544,Dean Martin,143.00222,Memories Are Made of This,1950s,Pop,Memories Are Made of This
-545,Teresa Brewer,154.24,Music Music Music,1950s,Pop,Music Music Music
-546,The Four Aces,182.33333,Love Is A Many Splendoured Thing,1950s,Pop,Love Is A Many Splendoured Thing
-547,Doris Day,167.74703,Bewitched,1950s,Pop,Bewitched
+544,Dean Martin,143.00222,Memories Are Made of This,1950s,Pop,This Time I'm Swingin'
+545,Teresa Brewer,154.24,Music Music Music,1950s,Pop,Miss Music
+546,The Four Aces,182.33333,Love Is A Many Splendoured Thing,1950s,Pop,Songs From The Heart
+547,Doris Day,167.74703,Bewitched,1950s,Pop,Day By Night
 548,Percy Faith,230.68154,The Song from Moulin Rouge,1950s,Easy Listening,The Song from Moulin Rouge
-549,Rosemary Clooney,89.8,Hey There,1950s,Pop,Hey There
-550,The Diamonds,30.06649,Little Darlin‘‰,1950s,Doo-Wop,Little Darlin‘‰
+549,Rosemary Clooney,89.8,Hey There,1950s,Pop,Songs From The Girl Singer
+550,The Diamonds,30.06649,Little Darlin‘‰,1950s,Doo-Wop,The Diamonds
 551,Jimmy Boyd,152.21655,I Saw Mommy Kissing Santa Claus,1950s,Pop,I Saw Mommy Kissing Santa Claus
-552,Patti Page,158.32,(How Much is That) Doggy in the Window,1950s,Pop,(How Much is That) Doggy in the Window
-553,Johnny Horton,178.21342,The Battle of New Orleans,1950s,Country,The Battle of New Orleans
-554,Dean Martin,185.46327,That's Amore,1950s,Pop,That's Amore
-555,Frankie Avalon,158.66667,Venus,1950s,Pop,Venus
+552,Patti Page,158.32,(How Much is That) Doggy in the Window,1950s,Pop,The Voice of Patti Page
+553,Johnny Horton,178.21342,The Battle of New Orleans,1950s,Country,Johnny Horton's Greatest Hits
+554,Dean Martin,185.46327,That's Amore,1950s,Pop,Sleep Warm
+555,Frankie Avalon,158.66667,Venus,1950s,Pop,Frankie Avalon
 556,The Kalin Twins,25.05098,When,1950s,Pop,When
-557,Les Paul & Mary Ford,141.06621,Mockin' Bird Hill,1950s,Jazz,Mockin' Bird Hill
-558,The Champs,65.98,Tequila,1950s,Rock,Tequila
-559,Paul Anka,25.05098,Lonely Boy,1950s,Pop,Lonely Boy
-560,PÍ©rez Prado,139.62667,Patricia,1950s,Latin,Patricia
+557,Les Paul & Mary Ford,141.06621,Mockin' Bird Hill,1950s,Jazz,The Hit Makers!
+558,The Champs,65.98,Tequila,1950s,Rock,Go Champs Go
+559,Paul Anka,25.05098,Lonely Boy,1950s,Pop,Paul Anka Sings His Big 15
+560,PÍ©rez Prado,139.62667,Patricia,1950s,Latin,Mambo No. 5: La Plata Sextette
 561,Percy Faith,221.28154,Delicado,1950s,Easy Listening,Delicado
-562,Chuck Berry,160.93288,Johnny B. Goode,1950s,Rock,Johnny B. Goode
-563,Jerry Lee Lewis,265.02667,Whole Lotta Shakin' Goin' On,1950s,Rock,Whole Lotta Shakin' Goin' On
-564,The Everly Brothers,131.12499,Bird Dog,1950s,Pop,Bird Dog
-565,Guy Mitchell,147.32866,Singing The Blues,1950s,Pop,Singing The Blues
-566,The Everly Brothers,192.80163,All I Have To Do Is Dream,1950s,Pop,All I Have To Do Is Dream
-567,Eddie Fisher,153.2,I Need You Now,1950s,Pop,I Need You Now
+562,Chuck Berry,160.93288,Johnny B. Goode,1950s,Rock,Chuck Berry Is On Top
+563,Jerry Lee Lewis,265.02667,Whole Lotta Shakin' Goin' On,1950s,Rock,Jerry Lee Lewis
+564,The Everly Brothers,131.12499,Bird Dog,1950s,Pop,A Date with The Everly Brothers
+565,Guy Mitchell,147.32866,Singing The Blues,1950s,Pop,Singin' the Blues
+566,The Everly Brothers,192.80163,All I Have To Do Is Dream,1950s,Pop,A Date with The Everly Brothers
+567,Eddie Fisher,153.2,I Need You Now,1950s,Pop,Eddie Fisher's Greatest Hits
 568,Perry Como,92.46998,Wanted,1950s,Pop,Wanted
-569,Frankie Laine,63.92998,I Believe,1950s,Pop,I Believe
+569,Frankie Laine,63.92998,I Believe,1950s,Pop,Frankie Laine's Greatest Hits
 570,Bobby Darin,71.68,Dream Lover,1950s,Pop,Dream Lover
-571,Kay Starr,180.93333,Wheel Of Fortune,1950s,Pop,Wheel Of Fortune
-572,Cliff Richard,25.05098,Living Doll,1950s,Pop,Living Doll
-573,The Four Aces,180.60984,Three Coins in a Fountain,1950s,Pop,Three Coins in a Fountain
-574,Rosemary Clooney,168.58667,Half As Much,1950s,Pop,Half As Much
-575,Rosemary Clooney,132.10077,Mambo Italiano,1950s,Pop,Mambo Italiano
-576,Eddie Fisher,188.33098,Oh My Papa (O Mein Papa),1950s,Pop,Oh My Papa (O Mein Papa)
+571,Kay Starr,180.93333,Wheel Of Fortune,1950s,Pop,Kay Starr's Greatest Hits
+572,Cliff Richard,25.05098,Living Doll,1950s,Pop,Cliff
+573,The Four Aces,180.60984,Three Coins in a Fountain,1950s,Pop,The Four Aces Sing
+574,Rosemary Clooney,168.58667,Half As Much,1950s,Pop,Clap Hands, Here Comes Rosie!
+575,Rosemary Clooney,132.10077,Mambo Italiano,1950s,Pop,Clap Hands, Here Comes Rosie!
+576,Eddie Fisher,188.33098,Oh My Papa (O Mein Papa),1950s,Pop,Eddie Fisher's Greatest Hits
 577,Al Hibbler,86.90998,Unchained Melody,1950s,Pop,Unchained Melody
 578,Conway Twitty,147.2,It's Only Make Believe,1950s,Country,It's Only Make Believe
-579,Billy Eckstine,183.50667,My Foolish Heart,1950s,Jazz,My Foolish Heart
+579,Billy Eckstine,183.50667,My Foolish Heart,1950s,Jazz,Billy Eckstine's Imagination
 580,Rosemary Clooney,70.82998,This Ole House,1950s,Pop,This Ole House
-581,Frank Chacksfield,146.73333,Terry's Theme From 'Limelight',1950s,Easy Listening,Terry's Theme From 'Limelight'
-582,Lloyd Price,146.37859,Personality,1950s,R&B,Personality
-583,Neil Sedaka,136.37079,Oh Carol,1950s,Pop,Oh Carol
-584,Elvis Presley,111.75955,Teddy Bear,1950s,Rock,Teddy Bear
-585,Chris Barber's Jazz & Blues Band,224.14667,Petite Fleur,1950s,Jazz,Petite Fleur
+581,Frank Chacksfield,146.73333,Terry's Theme From 'Limelight',1950s,Easy Listening,Music from Great Film Themes
+582,Lloyd Price,146.37859,Personality,1950s,R&B,The Best of Lloyd Price
+583,Neil Sedaka,136.37079,Oh Carol,1950s,Pop,Neil Sedaka Sings Little Devil and His Other Hits
+584,Elvis Presley,111.75955,Teddy Bear,1950s,Rock,Loving You
+585,Chris Barber's Jazz & Blues Band,224.14667,Petite Fleur,1950s,Jazz,Chris Barber's Jazz & Blues Band
 586,Tony Bennett,181.56,Because of You,1950s,Jazz,Because of You
-587,Johnnie Ray,159.99946,Just Walkin' In The Rain,1950s,Pop,Just Walkin' In The Rain
+587,Johnnie Ray,159.99946,Just Walkin' In The Rain,1950s,Pop,The Best of Johnnie Ray
 588,Mario Lanza,210.44,Be My Love,1950s,Classical,Be My Love
-589,The Platters,30.06649,My Prayer,1950s,Doo-Wop,My Prayer
-590,Nat King Cole,163.35937,Pretend,1950s,Jazz,Pretend
+589,The Platters,30.06649,My Prayer,1950s,Doo-Wop,The Platters
+590,Nat King Cole,163.35937,Pretend,1950s,Jazz,Love Is The Thing
 591,Elvis Presley,211.92,Love Me Tender,1950s,Rock,Love Me Tender
-592,Debbie Reynolds,189.6127,Tammy,1950s,Soundtrack,Tammy
-593,Tony Bennett,186.46667,Rags To Riches,1950s,Jazz,Rags To Riches
-594,The Everly Brothers,159.99955,Bye Bye Love,1950s,Pop,Bye Bye Love
+592,Debbie Reynolds,189.6127,Tammy,1950s,Soundtrack,The Complete Singles As & Bs 1951-58
+593,Tony Bennett,186.46667,Rags To Riches,1950s,Jazz,The Very Thought of You
+594,The Everly Brothers,159.99955,Bye Bye Love,1950s,Pop,The Everly Brothers
 595,Tommy Edwards,78.5,It's All in the Game,1950s,Pop,It's All in the Game
-596,The Browns,162.57333,The Three Bells,1950s,Pop,The Three Bells
+596,The Browns,162.57333,The Three Bells,1950s,Pop,The Browns Sing Their Hits
 597,Carl Perkins,135.97333,Blue Suede Shoes,1950s,Rock,Blue Suede Shoes
-598,Dinah Shore,160.85333,Dear Hearts and Gentle People,1950s,Pop,Dear Hearts and Gentle People
-599,Little Richard,127.70975,Long Tall Sally,1950s,Rock,Long Tall Sally
-600,David Whitfield,194.81333,Cara Mia,1950s,Pop,Cara Mia
+598,Dinah Shore,160.85333,Dear Hearts and Gentle People,1950s,Pop,Dinah Shore's Best Friend
+599,Little Richard,127.70975,Long Tall Sally,1950s,Rock,Here's Little Richard
+600,David Whitfield,194.81333,Cara Mia,1950s,Pop,David Whitfield's Greatest Hits
