@@ -8,7 +8,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 public class AddSongPane {
     VBox root;
@@ -18,7 +17,8 @@ public class AddSongPane {
         this.parent = parent;
 
         root = new VBox();
-        root.setAlignment(Pos.CENTER);
+        root.setAlignment(Pos.TOP_CENTER);
+        root.setStyle("-fx-background-color: lightblue");
 
         addChildren();
     }
@@ -44,26 +44,28 @@ public class AddSongPane {
         artistHBox.getChildren().addAll(artistLabel, artistInput);
         artistHBox.setAlignment(Pos.CENTER);
 
-        VBox submitVBox = new VBox();
-        Button addButton = new Button("Add song");
+        Label statusLabel = new Label();
 
-        Label errorLabel = new Label();
+        Button addButton = new Button("Add song");
         addButton.setOnAction(actionEvent -> {
             try {
-                errorLabel.setText("");
+                statusLabel.setStyle("-fx-text-fill: green;");
                 App.dbConn.insertSong(titleInput.getText(), artistInput.getText());
+                statusLabel.setText("Inserted song successfully");
             }
             catch (SQLException e) {
-                if (e instanceof SQLIntegrityConstraintViolationException) {
-                    errorLabel.setText("No such artist exists");
+                statusLabel.setStyle("-fx-text-fill: red;");
+                if (e.getErrorCode() == 1062) {
+                    statusLabel.setText("Song already exists");
+                } else if (e.getErrorCode() == 1452) {
+                    statusLabel.setText("No such artist exists");
                 } else {
-                    errorLabel.setText("An error occured");
+                    statusLabel.setText("An unknown error occured");
                 }
             }
         });
-        submitVBox.getChildren().addAll(addButton, errorLabel);
 
-        root.getChildren().addAll(headerHBox, titleHBox, artistHBox, submitVBox);
+        root.getChildren().addAll(headerHBox, titleHBox, artistHBox, addButton, statusLabel);
     }
 
     public VBox getRoot() {

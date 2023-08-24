@@ -172,14 +172,14 @@ class DatabaseConnection {
         }
     }
 
-    public void insertSong(String title, int artist_id, int duration, int genre_id) {
+    public void insertSong(String title, String artist, int duration, String genre_name) {
         try {
-            String insertString = "INSERT INTO Songs (song_title, artist_id, duration, genre_id) VALUES (?,?,?,?)";
+            String insertString = "INSERT INTO Songs (song_title, artist, duration, genre) VALUES (?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
-            insertStmt.setInt(2, artist_id);
+            insertStmt.setString(2, artist);
             insertStmt.setInt(3, duration);
-            insertStmt.setInt(4, genre_id);
+            insertStmt.setString(4, genre_name);
             insertStmt.executeUpdate();
             insertStmt.close();
         }
@@ -203,17 +203,12 @@ class DatabaseConnection {
         insertStmt.close();
     }
 
-    public void insertArtist(String name) {
-        try {
-            String insertString = "INSERT INTO Artists (artist_name) VALUES (?)";
-            PreparedStatement insertStmt = connection.prepareStatement(insertString);
-            insertStmt.setString(1, name);
-            insertStmt.executeUpdate();
-            insertStmt.close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void insertArtist(String name) throws SQLException {
+        String insertString = "INSERT INTO Artists (artist_name) VALUES (?)";
+        PreparedStatement insertStmt = connection.prepareStatement(insertString);
+        insertStmt.setString(1, name);
+        insertStmt.executeUpdate();
+        insertStmt.close();
     }
 
     public void insertGenre(String genre) {

@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 /**
  * JavaFX App
  */
@@ -36,14 +38,17 @@ public class App extends Application {
     }
 
     private void test() {
-        dbConn.insertArtist("Eminem"); //id 1
-        dbConn.insertGenre("2000s"); //id 1
-        dbConn.insertSong("Lose Yourself", 1, 265, 1); //id 1
-        if (dbConn.selectArtistByName("Eminem").equals("Eminem")) System.out.println("Select artist by name is functional.");
-        else System.out.println("ERROR: Select artist by name IS NOT functional!");
-        if (dbConn.selectSongByTitle("Lose Yourself") == 1) System.out.println("Select song by title is functional.");
-        else System.out.println("ERROR: Select song by title IS NOT functional!");
-        if (dbConn.selectGenreByName("2000s").equals("2000s")) System.out.println("Select genre by name is functional.");
-        else System.out.println("ERROR: Select genre by name IS NOT functional!");
+        try {
+            dbConn.insertArtist("Eminem");
+            dbConn.insertGenre("2000s");
+            dbConn.insertSong("Lose Yourself", "Eminem", 265, "2000s");
+            if (dbConn.selectArtistByName("Eminem").equals("Eminem")) System.out.println("Select artist by name is functional.");
+            else System.out.println("ERROR: Select artist by name IS NOT functional!");
+            if (dbConn.selectSongByTitle("Lose Yourself") == 1) System.out.println("Select song by title is functional.");
+            else System.out.println("ERROR: Select song by title IS NOT functional!");
+            if (dbConn.selectGenreByName("2000s").equals("2000s")) System.out.println("Select genre by name is functional.");
+            else System.out.println("ERROR: Select genre by name IS NOT functional!");
+        } catch (SQLException e) {
+        }
     }
 }

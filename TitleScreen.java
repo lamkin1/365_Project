@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
  * class to represent the main title screen
  */
 class TitleScreen {
-    VBox root;
+    StackPane root;
     final int width;
     final int height;
 
@@ -18,7 +18,7 @@ class TitleScreen {
         this.width = width;
         this.height = height;
 
-        root = new VBox();
+        root = new StackPane();
 
         addChildren();
     }
@@ -40,6 +40,9 @@ class TitleScreen {
         Tab albumsTab = new Tab("Albums");
         albumsTab.setClosable(false);
 
+        ArtistsPane artistsPane = new ArtistsPane();
+        artistsTab.setContent(artistsPane.getRoot());
+
         Tab genresTab = new Tab("Genres");
         genresTab.setClosable(false);
 
@@ -51,7 +54,7 @@ class TitleScreen {
         root.getChildren().addAll(tabPane);
     }
 
-    public VBox getRoot() {
+    public StackPane getRoot() {
         return root;
     }
 }

@@ -2,12 +2,12 @@ package com.mycompany.csc365p1;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.*;
+import javafx.scene.layout.VBox;
 
-public class SongPane {
+public class ArtistsPane {
     VBox root;
 
-    SongPane() {
+    ArtistsPane() {
         root = new VBox();
         root.setAlignment(Pos.TOP_CENTER);
         root.setFillWidth(true);
@@ -18,19 +18,19 @@ public class SongPane {
     public void addChildren() {
         root.getChildren().clear();
 
-        Button addSongButton = new Button("Add song");
-        addSongButton.setOnAction(actionEvent -> showAddSongPane());
+        Button addSongButton = new Button("Add artist");
+        addSongButton.setOnAction(actionEvent -> showAddArtistPane());
 
-        Button modifySongButton = new Button("Modify song");
-        Button findSongButton = new Button("Find song");
+        Button modifySongButton = new Button("Modify artist");
+        Button findSongButton = new Button("Find artist");
 
         root.getChildren().addAll(addSongButton, modifySongButton, findSongButton);
     }
 
-    void showAddSongPane() {
+    void showAddArtistPane() {
         root.getChildren().clear();
-        AddSongPane addSongPane = new AddSongPane(this);
-        root.getChildren().add(addSongPane.getRoot());
+        AddArtistPane addArtistPane = new AddArtistPane(this);
+        root.getChildren().add(addArtistPane.getRoot());
     }
 
     public VBox getRoot() {
