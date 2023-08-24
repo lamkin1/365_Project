@@ -1,7 +1,5 @@
 package com.mycompany.csc365p1;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-
 import java.sql.*;
 import java.util.Date;
 
@@ -11,11 +9,8 @@ class DatabaseConnection {
     DatabaseConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            //Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://ambari-node5.csc.calpoly.edu:3306/gr0up0", "gr0up0", "test123");
-            //    "jdbc:mysql://ambari-node5.csc.calpoly.edu:3306/ssponsle", "ssponsle", "028858030");
-            //            "jdbc:mysql://localhost:3306/test", "root", "123")
 
             System.out.println("Connected to DB");
         } catch (Exception e) {
@@ -27,24 +22,22 @@ class DatabaseConnection {
         return connection;
     }
 
-    //RETURNS ARTIST_ID
-    public int selectArtistByName(String name) {
+    public String selectArtistByName(String name) {
         try {
-            String selectString = "SELECT id FROM Artists WHERE artist_name = ?";
+            String selectString = "SELECT * FROM Artists WHERE artist_name = ?";
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
             selectStmt.setString(1, name);
             ResultSet rs = selectStmt.executeQuery();
             if (rs.next()) {
-                int artist_id = rs.getInt("id");
-                System.out.println("Found artist id from name: " + name + ": " + artist_id);
-                return artist_id;
+                System.out.println("Found artist with name: " + name);
+                return name;
             } else {
-                System.out.println("No artist id found for: " + name + "!");
+                System.out.println("No artist with name" + name + "found");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
     //RETURNS ARTIST_ID
@@ -87,52 +80,63 @@ class DatabaseConnection {
         return -1;
     }
 
-    //RETURNS ARTIST_ID
-    public int selectGenreByName(String name) {
+    public String selectGenreByName(String name) {
         try {
-            String selectString = "SELECT id FROM Genres WHERE genre_name = ?";
+            String selectString = "SELECT * FROM Genres WHERE genre_name = ?";
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
             selectStmt.setString(1, name);
             ResultSet rs = selectStmt.executeQuery();
             if (rs.next()) {
-                int genre_id = rs.getInt("id");
-                System.out.println("Found genre id from name: " + name + ": " + genre_id);
-                return genre_id;
+                System.out.println("Found genre with name: " + name);
+                return name;
             } else {
-                System.out.println("No genre id found for: " + name + "!");
+                System.out.println("No genre with name " + name + " found");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
-    //RETURNS ARTIST_ID
-    public int selectAlbumByName(String name) {
+    public String selectEraByName(String era) {
         try {
-            String selectString = "SELECT id FROM Albums WHERE album_name = ?";
+            String selectString = "SELECT * FROM Genres WHERE era = ?";
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
-            selectStmt.setString(1, name);
+            selectStmt.setString(1, era);
             ResultSet rs = selectStmt.executeQuery();
             if (rs.next()) {
-                int album_id = rs.getInt("id");
-                System.out.println("Found album id from name: " + name + ": " + album_id);
-                return album_id;
+                System.out.println("Found era: " + era);
+                return era;
             } else {
-                System.out.println("No album id found for: " + name + "!");
+                System.out.println("No era called " + era + " found");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
+    }
+
+    public String selectAlbum(String album_name, String artist_name) {
+        try {
+            String selectString = "SELECT * FROM Albums WHERE album_name = ? AND artist = ?";
+            PreparedStatement selectStmt = connection.prepareStatement(selectString);
+            selectStmt.setString(1, album_name);
+            selectStmt.setString(2, artist_name);
+            ResultSet rs = selectStmt.executeQuery();
+            if (rs.next()) {
+                System.out.println("Found album: " + artist_name + ": " + album_name);
+                return album_name + artist_name;
+            } else {
+                System.out.println("No album found for: " + artist_name + ": " + album_name + "!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void insertSong(String title, String artist, String album, int duration, String genre, String era, String URL) {
         try {
-            //auto commit might just work instead of manually committing after each insert
-            //connection.setAutoCommit(false);
-
-            //id, song_title, artist_id, album_id, duration(int), genre_id, url(varchar)
             String insertString = "INSERT INTO Songs (song_title, artist, album, duration, genre, era, url) VALUES (?,?,?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
@@ -143,21 +147,16 @@ class DatabaseConnection {
             insertStmt.setString(6, era);
             insertStmt.setString(7, URL);
             insertStmt.executeUpdate();
-            //connection.commit();
             insertStmt.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    //no URL constructor
+
     public void insertSong(String title, String artist, String album, int duration, String genre, String era) {
         try {
-            //auto commit might just work instead of manually committing after each insert
-            //connection.setAutoCommit(false);
-
-            //id, song_title, artist_id, album_id, duration(int), genre_id, url(varchar)
-            String insertString = "INSERT INTO Songs (song_title, artist_id, album_id, duration, genre_id) VALUES (?,?,?,?,?)";
+            String insertString = "INSERT INTO Songs (song_title, artist, album, duration, genre, era) VALUES (?,?,?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
             insertStmt.setString(2, artist);
@@ -166,20 +165,15 @@ class DatabaseConnection {
             insertStmt.setString(5, genre);
             insertStmt.setString(6, era);
             insertStmt.executeUpdate();
-            //connection.commit();
             insertStmt.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    //no URL + no album constructor
+
     public void insertSong(String title, int artist_id, int duration, int genre_id) {
         try {
-            //auto commit might just work instead of manually committing after each insert
-            //connection.setAutoCommit(false);
-
-            //id, song_title, artist_id, album_id, duration(int), genre_id, url(varchar)
             String insertString = "INSERT INTO Songs (song_title, artist_id, duration, genre_id) VALUES (?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
@@ -187,13 +181,13 @@ class DatabaseConnection {
             insertStmt.setInt(3, duration);
             insertStmt.setInt(4, genre_id);
             insertStmt.executeUpdate();
-            //connection.commit();
             insertStmt.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     //no URL + no album constructor
     public void insertSong(String title, String artist) throws SQLException {
         //auto commit might just work instead of manually committing after each insert
@@ -234,12 +228,26 @@ class DatabaseConnection {
             e.printStackTrace();
         }
     }
-    public void insertAlbum(String name, int artist_id) {
+
+    public void insertEra(String era) {
         try {
-            String insertString = "INSERT INTO Albums (album_name, artist_id) VALUES (?, ?)";
+            String insertString = "INSERT INTO Eras (era) VALUES (?)";
+            PreparedStatement insertStmt = connection.prepareStatement(insertString);
+            insertStmt.setString(1, era);
+            insertStmt.executeUpdate();
+            insertStmt.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertAlbum(String name, String artist_name) {
+        try {
+            String insertString = "INSERT INTO Albums (album_name, artist) VALUES (?, ?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, name);
-            insertStmt.setInt(2, artist_id);
+            insertStmt.setString(2, artist_name);
             insertStmt.executeUpdate();
             insertStmt.close();
         }
