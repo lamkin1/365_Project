@@ -21,7 +21,7 @@ public class App extends Application {
         SQLInitializer init = new SQLInitializer();
         CSVHelper csvh = new CSVHelper();
 
-        csvh.importSongs();
+        //csvh.importSongs();
         //init.initialize();
         
         //test(dbConn);
