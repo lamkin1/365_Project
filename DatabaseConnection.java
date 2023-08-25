@@ -134,29 +134,6 @@ class DatabaseConnection {
         return null;
     }
 
-    public void insertSong(String title, String artist, String album, int duration, String genre, String era, String URL) throws SQLException{
-        try {
-            String insertString = "INSERT INTO Songs (song_title, artist, album, duration, genre, era, url) VALUES (?,?,?,?,?,?)";
-            PreparedStatement insertStmt = connection.prepareStatement(insertString);
-            insertStmt.setString(1, title);
-            checkArtist(artist);
-            insertStmt.setString(2, artist);
-            checkAlbum(album, artist);
-            insertStmt.setString(3, album);
-            insertStmt.setInt(4, duration);
-            checkGenre(genre);
-            insertStmt.setString(5, genre);
-            checkEra(era);
-            insertStmt.setString(6, era);
-            insertStmt.setString(7, URL);
-            insertStmt.executeUpdate();
-            insertStmt.close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void insertSong(String title, String artist, String album, int duration, String genre, String era) throws SQLException{
         try {
             String insertString = "INSERT INTO Songs (song_title, artist, album, duration, genre, era) VALUES (?,?,?,?,?,?)";
@@ -197,12 +174,12 @@ class DatabaseConnection {
         }
     }
 
-    //no URL + no album constructor
+    //no album constructor
     public void insertSong(String title, String artist) throws SQLException {
         //auto commit might just work instead of manually committing after each insert
         //connection.setAutoCommit(false);
 
-        //id, song_title, artist_id, album_id, duration(int), genre_id, url(varchar)
+        //id, song_title, artist_id, album_id, duration(int), genre_id
         String insertString = "INSERT INTO Songs (song_title, artist) VALUES (?,?)";
         PreparedStatement insertStmt = connection.prepareStatement(insertString);
         insertStmt.setString(1, title);
