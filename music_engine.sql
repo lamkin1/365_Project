@@ -27,7 +27,6 @@ CREATE TABLE Songs (
     duration INT,
     genre varchar(50),
     era varchar(8),
-    url varchar(100),
     FOREIGN KEY (artist) REFERENCES Artists(artist_name),
     FOREIGN KEY (album) REFERENCES Albums(album_name),
     FOREIGN KEY (genre) REFERENCES Genres(genre_name),
