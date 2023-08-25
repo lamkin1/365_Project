@@ -41,7 +41,7 @@ public class AllSongsPane {
             ResultSet rs = App.dbConn.selectAllSongs();
             ResultSetMetaData metaData = rs.getMetaData();
 
-            for (int i = 1; i < metaData.getColumnCount(); i++) {
+            for (int i = 1; i < metaData.getColumnCount() + 1; i++) {
                 String colName = metaData.getColumnName(i);
                 TableColumn col = new TableColumn<>(colName);
                 col.setCellValueFactory(new PropertyValueFactory<Song, String>(colName));
