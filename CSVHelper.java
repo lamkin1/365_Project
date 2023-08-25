@@ -37,25 +37,10 @@ public class CSVHelper {
                 String era = info.get(4);
                 int duration = (int)Math.ceil(Double.parseDouble(info.get(2)));
 
-                boolean existingArtist = App.dbConn.selectArtistByName(artist) != null;
-                if (!existingArtist) {
-                    App.dbConn.insertArtist(artist);
-                }
-
-                boolean existingGenre = App.dbConn.selectGenreByName(genre) != null;
-                if (!existingGenre) {
-                    App.dbConn.insertGenre(genre);
-                }
-
-                boolean existingEra = App.dbConn.selectEraByName(era) != null;
-                if (!existingEra) {
-                    App.dbConn.insertEra(era);
-                }
-
-                boolean existingAlbum = App.dbConn.selectAlbum(album, artist) != null;
-                if (!existingAlbum) {
-                    App.dbConn.insertAlbum(album, artist);
-                }
+                App.dbConn.checkArtist(artist);
+                App.dbConn.checkGenre(genre);
+                App.dbConn.checkEra(era);
+                App.dbConn.checkAlbum(album, artist);
 
                 System.out.println("Title: " + title
                         + ", Arist: " + artist

@@ -61,23 +61,22 @@ class DatabaseConnection {
     }
 
     //RETURNS ARTIST_ID
-    public int selectPlaylistByName(String name) {
+    public String selectPlaylistByName(String name) {
         try {
             String selectString = "SELECT id FROM Playlists WHERE playlist_name = ?";
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
             selectStmt.setString(1, name);
             ResultSet rs = selectStmt.executeQuery();
             if (rs.next()) {
-                int playlist_id = rs.getInt("id");
-                System.out.println("Found playlist id from name: " + name + ": " + playlist_id);
-                return playlist_id;
+                System.out.println("Found playlist id from name: " + name);
+                return name;
             } else {
                 System.out.println("No playlist id found for: " + name + "!");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
     public String selectGenreByName(String name) {
@@ -135,15 +134,19 @@ class DatabaseConnection {
         return null;
     }
 
-    public void insertSong(String title, String artist, String album, int duration, String genre, String era, String URL) {
+    public void insertSong(String title, String artist, String album, int duration, String genre, String era, String URL) throws SQLException{
         try {
             String insertString = "INSERT INTO Songs (song_title, artist, album, duration, genre, era, url) VALUES (?,?,?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
+            checkArtist(artist);
             insertStmt.setString(2, artist);
+            checkAlbum(album, artist);
             insertStmt.setString(3, album);
             insertStmt.setInt(4, duration);
+            checkGenre(genre);
             insertStmt.setString(5, genre);
+            checkEra(era);
             insertStmt.setString(6, era);
             insertStmt.setString(7, URL);
             insertStmt.executeUpdate();
@@ -154,15 +157,19 @@ class DatabaseConnection {
         }
     }
 
-    public void insertSong(String title, String artist, String album, int duration, String genre, String era) {
+    public void insertSong(String title, String artist, String album, int duration, String genre, String era) throws SQLException{
         try {
             String insertString = "INSERT INTO Songs (song_title, artist, album, duration, genre, era) VALUES (?,?,?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
+            checkArtist(artist);
             insertStmt.setString(2, artist);
+            checkAlbum(artist, album);
             insertStmt.setString(3, album);
             insertStmt.setInt(4, duration);
+            checkGenre(genre);
             insertStmt.setString(5, genre);
+            checkEra(era);
             insertStmt.setString(6, era);
             insertStmt.executeUpdate();
             insertStmt.close();
@@ -172,13 +179,15 @@ class DatabaseConnection {
         }
     }
 
-    public void insertSong(String title, String artist, int duration, String genre_name) {
+    public void insertSong(String title, String artist, int duration, String genre_name) throws SQLException {
         try {
             String insertString = "INSERT INTO Songs (song_title, artist, duration, genre) VALUES (?,?,?,?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             insertStmt.setString(1, title);
+            checkArtist(artist);
             insertStmt.setString(2, artist);
             insertStmt.setInt(3, duration);
+            checkGenre(genre_name);
             insertStmt.setString(4, genre_name);
             insertStmt.executeUpdate();
             insertStmt.close();
@@ -197,6 +206,7 @@ class DatabaseConnection {
         String insertString = "INSERT INTO Songs (song_title, artist) VALUES (?,?)";
         PreparedStatement insertStmt = connection.prepareStatement(insertString);
         insertStmt.setString(1, title);
+        checkArtist(artist);
         insertStmt.setString(2, artist);
         insertStmt.executeUpdate();
         //connection.commit();
@@ -265,18 +275,55 @@ class DatabaseConnection {
             e.printStackTrace();
         }
     }
-    public void addSongToPlaylist(int song_id, int playlist_id) {
+    public void addSongToPlaylist(String title, String artist, String playlist_name) {
         try {
             //playlist_id, song_id
             String insertString = "INSERT INTO PlaylistSongs (playlist_id, song_id) VALUES (?, ?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
-            insertStmt.setInt(1, playlist_id);
-            insertStmt.setInt(2, song_id);
+            checkPlaylist(playlist_name);
+            insertStmt.setString(1, playlist_name);
+            //insertStmt.setString(2, song_id); UPDATE w/ Song Class
             insertStmt.executeUpdate();
             insertStmt.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void checkArtist(String artist) throws SQLException {
+        boolean existingArtist = App.dbConn.selectArtistByName(artist) != null;
+        if(!existingArtist){
+            App.dbConn.insertArtist(artist);
+        }
+    }
+
+    public void checkGenre(String genre) throws SQLException {
+        boolean existingGenre = App.dbConn.selectGenreByName(genre) != null;
+        if (!existingGenre) {
+            App.dbConn.insertGenre(genre);
+        }
+    }
+
+    public void checkEra(String era) throws SQLException {
+        boolean existingEra = App.dbConn.selectEraByName(era) != null;
+        if (!existingEra) {
+            App.dbConn.insertEra(era);
+        }
+    }
+
+    public void checkAlbum(String album, String artist) throws SQLException {
+        checkArtist(artist);
+        boolean existingAlbum = App.dbConn.selectAlbum(album, artist) != null;
+        if (!existingAlbum) {
+            App.dbConn.insertAlbum(album, artist);
+        }
+    }
+
+    public void checkPlaylist(String playlist){
+        boolean existingPlaylist = App.dbConn.selectPlaylistByName(playlist) != null;
+        if(!existingPlaylist){
+            App.dbConn.insertPlaylist(playlist);
         }
     }
 }
