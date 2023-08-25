@@ -49,6 +49,8 @@ CREATE TABLE PlaylistSongs (
     FOREIGN KEY(song) REFERENCES Songs(song_title)
 );
 
+ALTER TABLE Songs
+DROP COLUMN url;
 
 drop table PlaylistSongs;
 drop table Playlists;
