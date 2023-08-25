@@ -18,12 +18,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         dbConn = new DatabaseConnection();
-        SQLInitializer init = new SQLInitializer();
         CSVHelper csvh = new CSVHelper();
 
         //csvh.importSongs();
-        //init.initialize();
-        
         //test(dbConn);
 
         TitleScreen titleScreen = new TitleScreen(WIDTH, HEIGHT);
