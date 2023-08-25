@@ -50,47 +50,47 @@ public class SQLInitializer {
     }
     
     public void initializeTables() {
-        //artist_name
+        //artistName
         String createArtistsTable = "CREATE TABLE Artists ("
-                + "artist_name VARCHAR(50) NOT NULL,"
-                + "PRIMARY KEY (artist_name)"
+                + "artistName VARCHAR(50) NOT NULL,"
+                + "PRIMARY KEY (artistName)"
                 + ")";
         tables.add(createArtistsTable);
         
         String createGenresTable = "CREATE TABLE Genres ("
-                + "genre_name VARCHAR(50) NOT NULL,"
-                + "PRIMARY KEY (genre_name)"
+                + "genreName VARCHAR(50) NOT NULL,"
+                + "PRIMARY KEY (genreName)"
                 + ")";
         tables.add(createGenresTable);
         
         String createAlbumsTable = "CREATE TABLE Albums ("
-                + "album_name VARCHAR(50) NOT NULL,"
+                + "albumName VARCHAR(50) NOT NULL,"
                 + "artist VARCHAR(50) NOT NULL,"
-                + "PRIMARY KEY (album_name, artist),"
-                + "FOREIGN KEY(artist) REFERENCES Artists(artist_name)"
+                + "PRIMARY KEY (albumName, artist),"
+                + "FOREIGN KEY(artist) REFERENCES Artists(artistName)"
                 + ")";
         tables.add(createAlbumsTable);
         
-        //id, song_title, artist_id, album_id, duration(int), genre_id, url(varchar)
+        //id, songTitle, artist_id, album_id, duration(int), genre_id, url(varchar)
         String createSongsTable = "CREATE TABLE Songs ("
-                + "song_title VARCHAR(50) NOT NULL,"
+                + "songTitle VARCHAR(50) NOT NULL,"
                 + "artist VARCHAR(50) NOT NULL,"
                 + "album VARCHAR(50),"
                 + "duration INT,"
                 + "genre VARCHAR(50),"
                 + "era VARCHAR(8),"
-                + "PRIMARY KEY (song_title, artist),"
-                + "FOREIGN KEY (artist) REFERENCES Artists(artist_name),"
-                + "FOREIGN KEY (album) REFERENCES Albums(album_name),"
-                + "FOREIGN KEY (genre) REFERENCES Genres(genre_name),"
+                + "PRIMARY KEY (songTitle, artist),"
+                + "FOREIGN KEY (artist) REFERENCES Artists(artistName),"
+                + "FOREIGN KEY (album) REFERENCES Albums(albumName),"
+                + "FOREIGN KEY (genre) REFERENCES Genres(genreName),"
                 + "FOREIGN KEY (era) REFERENCES Eras(era)"
                 + ")";
         tables.add(createSongsTable);
         
         String createPlaylistsTable = "CREATE TABLE Playlists ("
-                + "playlist_name VARCHAR(50) NOT NULL,"
+                + "playlistName VARCHAR(50) NOT NULL,"
                 + "date_created DATE NOT NULL,"
-                + "PRIMARY KEY (playlist_name)"
+                + "PRIMARY KEY (playlistName)"
                 + ")";
         tables.add(createPlaylistsTable);
         
@@ -98,8 +98,8 @@ public class SQLInitializer {
                 + "playlist VARCHAR(50) NOT NULL,"
                 + "song VARCHAR(50) NOT NULL,"
                 + "PRIMARY KEY (playlist, song),"
-                + "FOREIGN KEY (playlist) REFERENCES Playlists(playlist_name),"
-                + "FOREIGN KEY(song) REFERENCES Songs(song_title)"
+                + "FOREIGN KEY (playlist) REFERENCES Playlists(playlistName),"
+                + "FOREIGN KEY(song) REFERENCES Songs(songTitle)"
                 + ")";
         tables.add(createPlaylistSongsTable);   
     }

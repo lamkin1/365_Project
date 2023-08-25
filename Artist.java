@@ -9,11 +9,11 @@ package com.mycompany.csc365p1;
  * @author seansponsler
  */
 public class Artist {
-    private String artist_name;
+    private String artistName;
     
     public Artist(String artist) { 
-        this.artist_name = artist;
+        this.artistName = artist;
     }
-    public String getArtist() { return this.artist_name; }
-    public void setArtist(String newArtist) { this.artist_name = newArtist; }
+    public String getArtist() { return this.artistName; }
+    public void setArtist(String newArtist) { this.artistName = newArtist; }
 }

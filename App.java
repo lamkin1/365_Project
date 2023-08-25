@@ -21,7 +21,7 @@ public class App extends Application {
         SQLInitializer init = new SQLInitializer();
         CSVHelper csvh = new CSVHelper();
 
-        //csvh.importSongs();
+        csvh.importSongs();
         //init.initialize();
         
         //test(dbConn);
@@ -41,7 +41,7 @@ public class App extends Application {
         try {
             dbConn.insertArtist("Eminem");
             dbConn.insertGenre("2000s");
-            dbConn.insertSong("Lose Yourself", "Eminem", 265, "2000s");
+            dbConn.insertSong("Lose Yourself", "Eminem", "8 Mile", 326, "Hip Hop", "2000s");
             if (dbConn.selectArtistByName("Eminem").equals("Eminem")) System.out.println("Select artist by name is functional.");
             else System.out.println("ERROR: Select artist by name IS NOT functional!");
             if (dbConn.selectSongByTitle("Lose Yourself") == 1) System.out.println("Select song by title is functional.");

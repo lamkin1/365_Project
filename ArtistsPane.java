@@ -18,19 +18,9 @@ public class ArtistsPane {
     public void addChildren() {
         root.getChildren().clear();
 
-        Button addSongButton = new Button("Add artist");
-        addSongButton.setOnAction(actionEvent -> showAddArtistPane());
+        Button findArtistButton = new Button("Find artist by name");
 
-        Button modifySongButton = new Button("Modify artist");
-        Button findSongButton = new Button("Find artist");
-
-        root.getChildren().addAll(addSongButton, modifySongButton, findSongButton);
-    }
-
-    void showAddArtistPane() {
-        root.getChildren().clear();
-        AddArtistPane addArtistPane = new AddArtistPane(this);
-        root.getChildren().add(addArtistPane.getRoot());
+        root.getChildren().addAll(findArtistButton);
     }
 
     public VBox getRoot() {

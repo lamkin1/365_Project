@@ -23,14 +23,22 @@ public class SongPane {
 
         Button modifySongButton = new Button("Modify song");
         Button findSongButton = new Button("Find song");
+        Button showAllSongsButton = new Button("Show all songs");
+        showAllSongsButton.setOnAction(actionEvent -> showAllSongsPane());
 
-        root.getChildren().addAll(addSongButton, modifySongButton, findSongButton);
+        root.getChildren().addAll(addSongButton, modifySongButton, findSongButton, showAllSongsButton);
     }
 
     void showAddSongPane() {
         root.getChildren().clear();
         AddSongPane addSongPane = new AddSongPane(this);
         root.getChildren().add(addSongPane.getRoot());
+    }
+
+    void showAllSongsPane() {
+        root.getChildren().clear();
+        AllSongsPane allSongsPane = new AllSongsPane(this);
+        root.getChildren().add(allSongsPane.getRoot());
     }
 
     public VBox getRoot() {

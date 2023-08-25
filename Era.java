@@ -10,7 +10,7 @@ package com.mycompany.csc365p1;
  */
 public class Era {
     private String era;
-    public Era(String era_name) { this.era = era_name; }
+    public Era(String eraName) { this.era = eraName; }
     public String getEra() { return this.era; }
-    public void setEraName(String era_name) { this.era = era_name; }
+    public void setEraName(String eraName) { this.era = eraName; }
 }

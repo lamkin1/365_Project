@@ -30,17 +30,13 @@ public class CSVHelper {
     public void importSongs() {
         try {
             for (List<String> info: songs.subList(1, songs.size())) {
+                System.out.println(songs.size());
                 String title = info.get(3);
                 String artist = info.get(1);
                 String album = info.get(6);
                 String genre = info.get(5);
                 String era = info.get(4);
                 int duration = (int)Math.ceil(Double.parseDouble(info.get(2)));
-
-                App.dbConn.checkArtist(artist);
-                App.dbConn.checkGenre(genre);
-                App.dbConn.checkEra(era);
-                App.dbConn.checkAlbum(album, artist);
 
                 System.out.println("Title: " + title
                         + ", Arist: " + artist
@@ -52,6 +48,7 @@ public class CSVHelper {
                 App.dbConn.insertSong(title, artist, album, duration, genre, era);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

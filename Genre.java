@@ -9,8 +9,8 @@ package com.mycompany.csc365p1;
  * @author seansponsler
  */
 public class Genre {
-    private String genre_name;
-    public Genre(String genre) { this.genre_name = genre; }
-    public String getGenreName() { return this.genre_name; }
-    public void setGenreName(String newGenre) { this.genre_name = newGenre; }
+    private String genreName;
+    public Genre(String genre) { this.genreName = genre; }
+    public String getGenreName() { return this.genreName; }
+    public void setGenreName(String newGenre) { this.genreName = newGenre; }
 }

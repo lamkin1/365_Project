@@ -11,19 +11,19 @@ import java.util.ArrayList;
  * @author seansponsler
  */
 public class Playlist {
-    String playlist_name;
+    String playlistName;
     String date_created;
     ArrayList<Song> tracklist;
     public Playlist(String name, String date) { 
-        this.playlist_name = name;
+        this.playlistName = name;
         this.date_created = date;
         tracklist = new ArrayList();
     }
-    public String getPlaylistName() { return this.playlist_name; }
+    public String getPlaylistName() { return this.playlistName; }
     public String getDateCreated() { return this.date_created; }
     public ArrayList<Song> getTracklist() { return this.tracklist; }
     
-    public void setPlaylistName(String newName) { this.playlist_name = newName; }
+    public void setPlaylistName(String newName) { this.playlistName = newName; }
     public void setDateCreated(String newDate) { this.date_created = newDate; }
     
     public void addSong(Song songToAdd) { this.tracklist.add(songToAdd); }
@@ -32,7 +32,7 @@ public class Playlist {
             this.tracklist.remove(songToRemove);
         }
         else {
-            System.err.println("Tracklist does not contain song titled: " + songToRemove.getTitle());
+            System.err.println("Tracklist does not contain song titled: " + songToRemove.getSongTitle());
         }
     }
     

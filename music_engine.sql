@@ -1,51 +1,51 @@
 CREATE TABLE Artists (
-    artist_name varchar(50) NOT NULL,
-    PRIMARY KEY (artist_name)
+    artistName varchar(60) NOT NULL,
+    PRIMARY KEY (artistName)
 );
 
 CREATE TABLE Genres (
-    genre_name varchar(50) NOT NULL,
-    PRIMARY KEY (genre_name)
+    genreName varchar(60) NOT NULL,
+    PRIMARY KEY (genreName)
 );
 
 CREATE TABLE Eras (
-    era varchar(8) NOT NULL,
+    era varchar(60) NOT NULL,
     PRIMARY KEY (era)
 );
 
 CREATE TABLE Albums (
-    album_name varchar(50) NOT NULL,
-    artist varchar(50) NOT NULL,
-    PRIMARY KEY (album_name, artist),
-    FOREIGN KEY(artist) REFERENCES Artists(artist_name)
+    albumName varchar(60) NOT NULL,
+    artist varchar(60) NOT NULL,
+    PRIMARY KEY (albumName, artist),
+    FOREIGN KEY(artist) REFERENCES Artists(artistName)
 );
 
 CREATE TABLE Songs (
-    song_title varchar(50) NOT NULL,
-    artist varchar(50) NOT NULL,
-    album varchar(50),
-    duration INT,
-    genre varchar(50),
-    era varchar(8),
-    FOREIGN KEY (artist) REFERENCES Artists(artist_name),
-    FOREIGN KEY (album) REFERENCES Albums(album_name),
-    FOREIGN KEY (genre) REFERENCES Genres(genre_name),
+    songTitle varchar(60) NOT NULL,
+    artist varchar(60) NOT NULL,
+    album varchar(60) NOT NULL,
+    duration INT NOT NULL,
+    genre varchar(60) NOT NULL,
+    era varchar(60) NOT NULL,
+    FOREIGN KEY (artist) REFERENCES Artists(artistName),
+    FOREIGN KEY (album) REFERENCES Albums(albumName),
+    FOREIGN KEY (genre) REFERENCES Genres(genreName),
     FOREIGN KEY (era) REFERENCES Eras(era),
-    PRIMARY KEY (song_title, artist)
+    PRIMARY KEY (songTitle, artist)
 );
 
 CREATE TABLE Playlists (
-    playlist_name varchar(50) NOT NULL,
-    date_created DATE NOT NULL,
-    PRIMARY KEY (playlist_name)
+    playlistName varchar(60) NOT NULL,
+    dateCreated DATE NOT NULL,
+    PRIMARY KEY (playlistName)
 );
 
 CREATE TABLE PlaylistSongs (
-    playlist varchar(50) NOT NULL,
-    song varchar(50) NOT NULL,
+    playlist varchar(60) NOT NULL,
+    song varchar(60) NOT NULL,
     PRIMARY KEY (playlist, song),
-    FOREIGN KEY(playlist) REFERENCES Playlists(playlist_name),
-    FOREIGN KEY(song) REFERENCES Songs(song_title)
+    FOREIGN KEY(playlist) REFERENCES Playlists(playlistName),
+    FOREIGN KEY(song) REFERENCES Songs(songTitle)
 );
 
 ALTER TABLE Songs

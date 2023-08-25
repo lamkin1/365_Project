@@ -2,7 +2,6 @@ package com.mycompany.csc365p1;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
@@ -32,17 +31,12 @@ public class AddSongPane {
         HBox headerHBox = new HBox();
         headerHBox.getChildren().add(returnButton);
 
-        Label titleLabel = new Label("Title:");
-        TextField titleInput = new TextField();
-        HBox titleHBox = new HBox();
-        titleHBox.getChildren().addAll(titleLabel, titleInput);
-        titleHBox.setAlignment(Pos.CENTER);
-
-        Label artistLabel = new Label("Artist:");
-        TextField artistInput = new TextField();
-        HBox artistHBox = new HBox();
-        artistHBox.getChildren().addAll(artistLabel, artistInput);
-        artistHBox.setAlignment(Pos.CENTER);
+        InputLabel titleInputLabel = new InputLabel("Title");
+        InputLabel artistInputLabel = new InputLabel("Artist");
+        InputLabel albumInputLabel = new InputLabel("Album");
+        InputLabel durationInputLabel = new InputLabel("Duration");
+        InputLabel genreInputLabel = new InputLabel("Genre");
+        InputLabel eraInputLabel = new InputLabel("Era");
 
         Label statusLabel = new Label();
 
@@ -50,7 +44,14 @@ public class AddSongPane {
         addButton.setOnAction(actionEvent -> {
             try {
                 statusLabel.setStyle("-fx-text-fill: green;");
-                App.dbConn.insertSong(titleInput.getText(), artistInput.getText());
+                App.dbConn.insertSong(
+                        titleInputLabel.getText(),
+                        artistInputLabel.getText(),
+                        albumInputLabel.getText(),
+                        Integer.parseInt(durationInputLabel.getText()),
+                        genreInputLabel.getText(),
+                        eraInputLabel.getText()
+                );
                 statusLabel.setText("Inserted song successfully");
             }
             catch (SQLException e) {
@@ -63,9 +64,22 @@ public class AddSongPane {
                     statusLabel.setText("An unknown error occured");
                 }
             }
+            catch (NumberFormatException e) {
+                statusLabel.setText("Duration must be a valid integer");
+            }
         });
 
-        root.getChildren().addAll(headerHBox, titleHBox, artistHBox, addButton, statusLabel);
+        root.getChildren().addAll(
+                headerHBox,
+                titleInputLabel.getRoot(),
+                artistInputLabel.getRoot(),
+                albumInputLabel.getRoot(),
+                durationInputLabel.getRoot(),
+                genreInputLabel.getRoot(),
+                eraInputLabel.getRoot(),
+                addButton,
+                statusLabel
+        );
     }
 
     public VBox getRoot() {
