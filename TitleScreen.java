@@ -51,6 +51,9 @@ class TitleScreen {
         Tab playlistsTab = new Tab("Playlists");
         playlistsTab.setClosable(false);
 
+        PlaylistPane playlistPane = new PlaylistPane();
+        playlistsTab.setContent(playlistPane.getRoot());
+
         tabPane.getTabs().addAll(songsTab, artistsTab, albumsTab, genresTab, playlistsTab);
 
         root.getChildren().addAll(tabPane);

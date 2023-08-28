@@ -12,18 +12,18 @@ import java.util.ArrayList;
  */
 public class Playlist {
     String playlistName;
-    String date_created;
+    String dateCreated;
     ArrayList<Song> tracklist;
     public Playlist(String name, ArrayList<Song> tracklist) { 
         this.playlistName = name;
         this.tracklist = tracklist;
     }
     public String getPlaylistName() { return this.playlistName; }
-    public String getDateCreated() { return this.date_created; }
+    public String getDateCreated() { return this.dateCreated; }
     public ArrayList<Song> getTracklist() { return this.tracklist; }
     
     public void setPlaylistName(String newName) { this.playlistName = newName; }
-    public void setDateCreated(String newDate) { this.date_created = newDate; }
+    public void setDateCreated(String newDate) { this.dateCreated = newDate; }
     public void setTracklist(ArrayList<Song> newTracklist) { this.tracklist = newTracklist; }
     public void addSong(Song songToAdd) { this.tracklist.add(songToAdd); }
     public void removeSong(Song songToRemove) {

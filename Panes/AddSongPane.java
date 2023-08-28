@@ -12,6 +12,7 @@ public class AddSongPane extends ChildPane {
         super(parent);
     }
 
+    @Override
     void addChildren() {
         super.addChildren();
 

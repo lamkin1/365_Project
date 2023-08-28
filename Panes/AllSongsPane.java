@@ -3,8 +3,8 @@ package com.mycompany.csc365p1.Panes;
 import com.mycompany.csc365p1.App;
 import com.mycompany.csc365p1.Song;
 import javafx.collections.FXCollections;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.ResultSet;
@@ -22,6 +22,7 @@ public class AllSongsPane extends ChildPane {
         super.addChildren();
 
         TableView table = new TableView();
+        table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         ArrayList<Song> songs = new ArrayList<>();
 
@@ -52,6 +53,44 @@ public class AllSongsPane extends ChildPane {
             System.out.println("Select all songs error");
         }
 
-        root.getChildren().add(table);
+        Button findSongButton = new Button("Find song");
+
+        ArrayList<String> playlistNames = App.dbConn.getPlaylistNames();
+        ComboBox<String> playlistComboBox = new ComboBox<>(FXCollections.observableArrayList(playlistNames));
+        playlistComboBox.setEditable(true);
+
+        Button addSongToPlaylistButton = new Button("Add selected song(s) to playlist");
+        addSongToPlaylistButton.setOnAction(actionEvent -> {
+            ObservableList<Song> selectedSongs = table.getSelectionModel().getSelectedItems();
+            String playlistName = playlistComboBox.getValue();
+
+            selectedSongs.forEach(song -> {
+                App.dbConn.addSongToPlaylist(song, playlistName);
+            });
+        });
+
+        InputLabel titleInputLabel = new InputLabel("Title");
+        InputLabel artistInputLabel = new InputLabel("Artist");
+        InputLabel albumInputLabel = new InputLabel("Album");
+        InputLabel durationInputLabel = new InputLabel("Duration");
+        InputLabel genreInputLabel = new InputLabel("Genre");
+        InputLabel eraInputLabel = new InputLabel("Era");
+
+        Label statusLabel = new Label();
+
+        root.getChildren().addAll(
+                table,
+                addSongToPlaylistButton,
+                playlistComboBox,
+                titleInputLabel.root,
+                artistInputLabel.root,
+                albumInputLabel.root,
+                durationInputLabel.root,
+                genreInputLabel.root,
+                eraInputLabel.root,
+                findSongButton,
+                statusLabel
+        );
+
     }
 }

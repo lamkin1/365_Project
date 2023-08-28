@@ -41,10 +41,9 @@ public class DatabaseConnection {
         return null;
     }
 
-    //song_title, artist, album, duration, genre, era
     public Song selectSongByTitle(String title) {
         try {
-            String selectString = "SELECT id FROM Songs WHERE songTitle = ?";
+            String selectString = "SELECT * FROM Songs WHERE songTitle = ?";
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
             selectStmt.setString(1, title);
             ResultSet rs = selectStmt.executeQuery();
@@ -60,6 +59,7 @@ public class DatabaseConnection {
             }
             selectStmt.close();
         } catch (SQLException e) {
+            System.out.println("Error selecting song by title");
             e.printStackTrace();
         }
         return null;
@@ -70,8 +70,13 @@ public class DatabaseConnection {
         return selectStmt.executeQuery();
     }
     
-    public ResultSet selectAllPlaylists() throws SQLException {
+    public ResultSet selectAllPlaylistSongs() throws SQLException {
         PreparedStatement selectStmt = connection.prepareStatement("SELECT * FROM PlaylistSongs ORDER BY playlist asc;");
+        return selectStmt.executeQuery();
+    }
+
+    public ResultSet selectAllPlaylists() throws SQLException {
+        PreparedStatement selectStmt = connection.prepareStatement("SELECT * FROM Playlists;");
         return selectStmt.executeQuery();
     }
     
@@ -134,8 +139,6 @@ public class DatabaseConnection {
             selectStmt.setString(1, name);
             ResultSet rs = selectStmt.executeQuery();
             if (rs.next()) {
-                //CURDATE()
-                ArrayList<Song> tracklist = getTracklistFromPlaylist(name);
                 return name;
             } else {
                 System.out.println("No playlist id found for: " + name + "!");
@@ -177,8 +180,21 @@ public class DatabaseConnection {
     public void updateAlbum(Album oldAlbum, Album newAlbum) {
         //contains tracklist arraylist, 
     }
-    
-    
+
+    public ArrayList<String> getPlaylistNames() {
+        ArrayList<String> playlistNames = new ArrayList<>();
+        try {
+            ResultSet rs = this.selectAllPlaylists();
+
+            while (rs.next()) {
+                playlistNames.add(rs.getString("playlistName"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Select all playlists error");
+        }
+        return playlistNames;
+    }
+
     public ArrayList<Song> getTracklistFromPlaylist(String name) {
         try {
             ArrayList<Song> tracklist = new ArrayList();
@@ -186,11 +202,10 @@ public class DatabaseConnection {
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
             selectStmt.setString(1, name);
             ResultSet rs = selectStmt.executeQuery();
-            if (rs.next() == false) {
-                System.out.println("No playlist found for: " + name + "!");
+            if (!rs.next()) {
+                System.out.println("No songs in playlist: " + name + "!");
             }
             while (rs.next()) {
-                //rs.getString("song");
                 Song songToAdd = selectSongByTitle(rs.getString("song"));
                 tracklist.add(songToAdd);
             }
@@ -198,7 +213,7 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
     
     public ArrayList<Song> getTracklistFromAlbum(String name) {
@@ -208,7 +223,7 @@ public class DatabaseConnection {
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
             selectStmt.setString(1, name);
             ResultSet rs = selectStmt.executeQuery();
-            if (rs.next() == false) {
+            if (!rs.next()) {
                 System.out.println("No playlist found for: " + name + "!");
             }
             while (rs.next()) {
@@ -338,35 +353,32 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
     }
-    public void insertPlaylist(String playlistName) {
-        try {
-            //playlistName, date_created
-            String insertString = "INSERT INTO Playlists (playlistName, date_created) VALUES (?, ?)";
-            PreparedStatement insertStmt = connection.prepareStatement(insertString);
-            insertStmt.setString(1, playlistName);
-            Date currentDate = new Date();
-            insertStmt.setDate(2, new java.sql.Date(currentDate.getTime()));
-            insertStmt.executeUpdate();
-            insertStmt.close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void insertPlaylist(String playlistName) throws SQLException {
+        String insertString = "INSERT INTO Playlists (playlistName, dateCreated) VALUES (?, ?)";
+        PreparedStatement insertStmt = connection.prepareStatement(insertString);
+        insertStmt.setString(1, playlistName);
+        Date currentDate = new Date();
+        insertStmt.setDate(2, new java.sql.Date(currentDate.getTime()));
+        insertStmt.executeUpdate();
+        insertStmt.close();
     }
     
-    public void addSongToPlaylist(Song song, String playlistName) {
+    public boolean addSongToPlaylist(Song song, String playlistName) {
         try {
-            //playlist_id, song_id
-            String insertString = "INSERT INTO PlaylistSongs (playlist_id, song) VALUES (?, ?)";
+            String insertString = "INSERT INTO PlaylistSongs (playlist, song, artist) VALUES (?, ?, ?)";
             PreparedStatement insertStmt = connection.prepareStatement(insertString);
             checkPlaylist(playlistName);
             insertStmt.setString(1, playlistName);
             insertStmt.setString(2, song.getSongTitle());
+            insertStmt.setString(3, song.getArtist());
             insertStmt.executeUpdate();
             insertStmt.close();
+
+            return true;
         }
         catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -398,9 +410,9 @@ public class DatabaseConnection {
         }
     }
 
-    public void checkPlaylist(String playlist){
+    public void checkPlaylist(String playlist) throws SQLException {
         boolean existingPlaylist = App.dbConn.selectPlaylistByName(playlist) != null;
-        if(!existingPlaylist){
+        if (!existingPlaylist){
             App.dbConn.insertPlaylist(playlist);
         }
     }
