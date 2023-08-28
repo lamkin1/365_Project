@@ -14,6 +14,6 @@ public class Artist {
     public Artist(String artist) { 
         this.artistName = artist;
     }
-    public String getArtist() { return this.artistName; }
-    public void setArtist(String newArtist) { this.artistName = newArtist; }
+    public String getArtistName() { return this.artistName; }
+    public void setArtistName(String newArtist) { this.artistName = newArtist; }
 }

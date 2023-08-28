@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-class DatabaseConnection {
+public class DatabaseConnection {
     Connection connection;
 
     DatabaseConnection() {
@@ -126,7 +126,13 @@ class DatabaseConnection {
         return selectStmt.executeQuery();
     }
 
-    public Playlist selectPlaylistByName(String name) {
+    public ResultSet selectAllArtists() throws SQLException {
+        PreparedStatement selectStmt = connection.prepareStatement("SELECT * FROM Artists");
+        return selectStmt.executeQuery();
+    }
+
+    //RETURNS ARTIST_ID
+    public String selectPlaylistByName(String name) {
         try {
             String selectString = "SELECT * FROM Playlists WHERE playlistName = ?";
             PreparedStatement selectStmt = connection.prepareStatement(selectString);

@@ -1,37 +1,25 @@
-package com.mycompany.csc365p1;
+package com.mycompany.csc365p1.Panes;
 
+import com.mycompany.csc365p1.App;
+import com.mycompany.csc365p1.Song;
 import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AllSongsPane {
-    VBox root;
-    SongPane parent;
-
+public class AllSongsPane extends ChildPane {
     AllSongsPane(SongPane parent) {
-        this.parent = parent;
-
-        root = new VBox();
-        root.setAlignment(Pos.TOP_CENTER);
-        root.setStyle("-fx-background-color: lightblue");
-
-        addChildren();
+        super(parent);
     }
 
+    @Override
     void addChildren() {
-        root.getChildren().clear();
-
-        Button returnButton = new Button("Return");
-        returnButton.setOnAction(actionEvent -> parent.addChildren());
+        super.addChildren();
 
         TableView table = new TableView();
 
@@ -64,10 +52,6 @@ public class AllSongsPane {
             System.out.println("Select all songs error");
         }
 
-        root.getChildren().addAll(returnButton, table);
-    }
-
-    public VBox getRoot() {
-        return root;
+        root.getChildren().add(table);
     }
 }

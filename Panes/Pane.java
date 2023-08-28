@@ -1,13 +1,12 @@
-package com.mycompany.csc365p1;
+package com.mycompany.csc365p1.Panes;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class ArtistsPane {
+public class Pane {
     VBox root;
 
-    ArtistsPane() {
+    protected Pane() {
         root = new VBox();
         root.setAlignment(Pos.TOP_CENTER);
         root.setFillWidth(true);
@@ -17,10 +16,11 @@ public class ArtistsPane {
 
     public void addChildren() {
         root.getChildren().clear();
+    }
 
-        Button findArtistButton = new Button("Find artist by name");
-
-        root.getChildren().addAll(findArtistButton);
+    public void showPane(VBox childRoot) {
+        root.getChildren().clear();
+        root.getChildren().add(childRoot);
     }
 
     public VBox getRoot() {

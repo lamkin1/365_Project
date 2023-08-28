@@ -1,35 +1,18 @@
-package com.mycompany.csc365p1;
+package com.mycompany.csc365p1.Panes;
 
-import javafx.geometry.Pos;
+import com.mycompany.csc365p1.App;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 
 import java.sql.SQLException;
 
-public class AddSongPane {
-    VBox root;
-    SongPane parent;
-
-    AddSongPane(SongPane parent) {
-        this.parent = parent;
-
-        root = new VBox();
-        root.setAlignment(Pos.TOP_CENTER);
-        root.setStyle("-fx-background-color: lightblue");
-
-        addChildren();
+public class AddSongPane extends ChildPane {
+    AddSongPane(Pane parent) {
+        super(parent);
     }
 
     void addChildren() {
-        root.getChildren().clear();
-
-        Button returnButton = new Button("Return");
-        returnButton.setOnAction(actionEvent -> parent.addChildren());
-
-        HBox headerHBox = new HBox();
-        headerHBox.getChildren().add(returnButton);
+        super.addChildren();
 
         InputLabel titleInputLabel = new InputLabel("Title");
         InputLabel artistInputLabel = new InputLabel("Artist");
@@ -70,7 +53,6 @@ public class AddSongPane {
         });
 
         root.getChildren().addAll(
-                headerHBox,
                 titleInputLabel.getRoot(),
                 artistInputLabel.getRoot(),
                 albumInputLabel.getRoot(),
@@ -80,9 +62,5 @@ public class AddSongPane {
                 addButton,
                 statusLabel
         );
-    }
-
-    public VBox getRoot() {
-        return root;
     }
 }

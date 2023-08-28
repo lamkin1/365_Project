@@ -1,4 +1,4 @@
-package com.mycompany.csc365p1;
+package com.mycompany.csc365p1.Panes;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

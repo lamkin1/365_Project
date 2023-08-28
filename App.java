@@ -13,7 +13,7 @@ public class App extends Application {
     final int WIDTH = 1000;
     final int HEIGHT = 800;
 
-    static DatabaseConnection dbConn;
+    public static DatabaseConnection dbConn;
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +23,7 @@ public class App extends Application {
         //csvh.importSongs();
         //test(dbConn);
 
-        TitleScreen titleScreen = new TitleScreen(WIDTH, HEIGHT);
+        TitleScreen titleScreen = new TitleScreen();
 
         Scene scene = new Scene(titleScreen.getRoot(), WIDTH, HEIGHT);
         stage.setScene(scene);

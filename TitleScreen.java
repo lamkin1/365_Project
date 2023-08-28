@@ -1,5 +1,6 @@
 package com.mycompany.csc365p1;
 
+import com.mycompany.csc365p1.Panes.*;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.*;
@@ -11,13 +12,8 @@ import javafx.scene.layout.*;
  */
 class TitleScreen {
     StackPane root;
-    final int width;
-    final int height;
 
-    TitleScreen(int width, int height) {
-        this.width = width;
-        this.height = height;
-
+    TitleScreen() {
         root = new StackPane();
 
         addChildren();
@@ -40,11 +36,17 @@ class TitleScreen {
         Tab albumsTab = new Tab("Albums");
         albumsTab.setClosable(false);
 
+        AlbumPane albumPane = new AlbumPane();
+        albumsTab.setContent(albumPane.getRoot());
+
         ArtistsPane artistsPane = new ArtistsPane();
         artistsTab.setContent(artistsPane.getRoot());
 
         Tab genresTab = new Tab("Genres");
         genresTab.setClosable(false);
+
+        GenrePane genrePane = new GenrePane();
+        genresTab.setContent(genrePane.getRoot());
 
         Tab playlistsTab = new Tab("Playlists");
         playlistsTab.setClosable(false);
