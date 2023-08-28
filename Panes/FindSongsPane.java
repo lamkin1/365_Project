@@ -37,7 +37,6 @@ public class FindSongsPane extends ChildPane {
                 durationInputLabel.getRoot(),
                 genreInputLabel.getRoot(),
                 eraInputLabel.getRoot(),
-                findSongButton,
                 updateSongButton,
                 deleteSongButton,
                 statusLabel

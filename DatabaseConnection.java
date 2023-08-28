@@ -126,11 +126,6 @@ public class DatabaseConnection {
         return selectStmt.executeQuery();
     }
 
-    public ResultSet selectAllArtists() throws SQLException {
-        PreparedStatement selectStmt = connection.prepareStatement("SELECT * FROM Artists");
-        return selectStmt.executeQuery();
-    }
-
     //RETURNS ARTIST_ID
     public String selectPlaylistByName(String name) {
         try {
@@ -141,7 +136,7 @@ public class DatabaseConnection {
             if (rs.next()) {
                 //CURDATE()
                 ArrayList<Song> tracklist = getTracklistFromPlaylist(name);
-                return new Playlist(name, tracklist);
+                return name;
             } else {
                 System.out.println("No playlist id found for: " + name + "!");
             }
