@@ -45,7 +45,7 @@ public class CSVHelper {
                         + ", Era: " + era
                         + ", Duration: " + duration
                 );
-                App.dbConn.insertSong(title, artist, album, duration, genre, era);
+                App.dbConn.insertSong(new Song(title, artist, album, duration, genre, era));
             }
         } catch (SQLException e) {
             e.printStackTrace();

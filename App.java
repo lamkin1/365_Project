@@ -33,7 +33,7 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
+/*
     private void test() {
         try {
             dbConn.insertArtist("Eminem");
@@ -48,4 +48,5 @@ public class App extends Application {
         } catch (SQLException e) {
         }
     }
+*/
 }

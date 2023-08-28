@@ -11,17 +11,25 @@ import java.util.ArrayList;
  * @author seansponsler
  */
 public class Album {
-    private String albumName;
-    private Artist artist;
+    private String album_name;
+    private String artist;
     private ArrayList<Song> tracklist;
     
-    public Album(String albumName, Artist artist, Song song) {
-        this.albumName = albumName;
+    public Album(String album_name, String artist, Song song) {
+        this.album_name = album_name;
         this.artist = artist;
         this.tracklist = new ArrayList();
         this.tracklist.add(song);
     }
-    public String getAlbumName() { return this.albumName; }
-    public Artist getArtist() { return this.artist; }
+    public Album(String album_name, String artist, ArrayList<Song> tracklist) {
+        this.album_name = album_name;
+        this.artist = artist;
+        this.tracklist = tracklist;
+    }
+    public void setTracklist(ArrayList<Song> newTracklist) { this.tracklist = newTracklist; }
+    public void setName(String newName) { this.album_name = newName; }
+    public void setArtist(String newArtist) { this.artist = newArtist; }
+    public String getAlbumName() { return this.album_name; }
+    public String getArtist() { return this.artist; }
     public ArrayList<Song> getTracklist() { return this.tracklist; }
 }

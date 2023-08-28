@@ -44,14 +44,14 @@ public class AddSongPane {
         addButton.setOnAction(actionEvent -> {
             try {
                 statusLabel.setStyle("-fx-text-fill: green;");
-                App.dbConn.insertSong(
+                App.dbConn.insertSong(new Song(
                         titleInputLabel.getText(),
                         artistInputLabel.getText(),
                         albumInputLabel.getText(),
                         Integer.parseInt(durationInputLabel.getText()),
                         genreInputLabel.getText(),
                         eraInputLabel.getText()
-                );
+                ));
                 statusLabel.setText("Inserted song successfully");
             }
             catch (SQLException e) {

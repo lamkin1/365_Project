@@ -14,10 +14,9 @@ public class Playlist {
     String playlistName;
     String date_created;
     ArrayList<Song> tracklist;
-    public Playlist(String name, String date) { 
+    public Playlist(String name, ArrayList<Song> tracklist) { 
         this.playlistName = name;
-        this.date_created = date;
-        tracklist = new ArrayList();
+        this.tracklist = tracklist;
     }
     public String getPlaylistName() { return this.playlistName; }
     public String getDateCreated() { return this.date_created; }
@@ -25,7 +24,7 @@ public class Playlist {
     
     public void setPlaylistName(String newName) { this.playlistName = newName; }
     public void setDateCreated(String newDate) { this.date_created = newDate; }
-    
+    public void setTracklist(ArrayList<Song> newTracklist) { this.tracklist = newTracklist; }
     public void addSong(Song songToAdd) { this.tracklist.add(songToAdd); }
     public void removeSong(Song songToRemove) {
         if (this.tracklist.contains(songToRemove)) {
