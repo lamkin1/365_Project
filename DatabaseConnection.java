@@ -318,15 +318,41 @@ public class DatabaseConnection {
     }
     
     //JAMES
-    public void updateSong(Song oldSong, Song newSong) {
+    public void updateSong(Song oldSong, Song newSong) throws SQLException {
         //find old song by selectSongsByTitle(oldSong.getTitle());
         //write update SQL statement to replace all fields with new song fields
+        ArrayList<Song> songs = selectSongsByTitle(oldSong.getSongTitle());
+        ensureSongIntegrityConstraints(newSong.getArtist(), newSong.getAlbum(), newSong.getGenre(), newSong.getEra());
+        PreparedStatement selectStmt = connection.prepareStatement("UPDATE Songs SET song_title = ?, artist = ?, album = ?, duration = ?, genre = ?, era = ? WHERE song_title = ? and artist = ?");
+        selectStmt.setString(1, newSong.getSongTitle());
+        selectStmt.setString(2, newSong.getArtist());
+        selectStmt.setString(3, newSong.getAlbum());
+        selectStmt.setInt(4, newSong.getDuration());
+        selectStmt.setString(5, newSong.getGenre());
+        selectStmt.setString(6, newSong.getEra());
+        selectStmt.setString(7, oldSong.getSongTitle());
+        selectStmt.setString(8, oldSong.getArtist());
     }
-    public void updateArtist(Artist oldArtist, Artist newArtist) {
-        
+    public void updateArtist(Artist oldArtist, Artist newArtist) throws SQLException {
+        Artist artist = selectArtistByName(oldArtist.getArtistName());
+        ensureArtist(newArtist.getArtistName());
+        PreparedStatement selectStmt = connection.prepareStatement("UPDATE Artists SET artist_name = ? WHERE artist_name = ?");
+        selectStmt.setString(1, newArtist.getArtistName());
+        selectStmt.setString(2, artist.getArtistName());
+        ResultSet rs = selectStmt.executeQuery();
+        selectStmt.close();
     }
-    public void updateAlbum(Album oldAlbum, Album newAlbum) {
-        //contains tracklist arraylist, 
+    public void updateAlbum(Album oldAlbum, Album newAlbum) throws SQLException {
+        Album album = selectAlbumByName(oldAlbum.getAlbumName());
+        ensureArtist(newAlbum.getArtist());
+        ensureAlbum(newAlbum.getAlbumName(), newAlbum.getArtist());
+        PreparedStatement selectStmt = connection.prepareStatement("UPDATE Albums SET album_name = ?, artist = ? WHERE album_name = ? and artist = ?");
+        selectStmt.setString(1, newAlbum.getAlbumName());
+        selectStmt.setString(2, newAlbum.getArtist());
+        selectStmt.setString(3, album.getAlbumName());
+        selectStmt.setString(4, album.getArtist());
+        ResultSet rs = selectStmt.executeQuery();
+        selectStmt.close();
     }
 
     public ArrayList<String> getPlaylistNames() {
