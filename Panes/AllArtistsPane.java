@@ -4,16 +4,17 @@ import com.mycompany.csc365p1.App;
 import com.mycompany.csc365p1.Artist;
 import com.mycompany.csc365p1.Song;
 import javafx.collections.FXCollections;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllArtistsPane extends ChildPane {
+    TableView table;
     public AllArtistsPane(Pane parent) {
         super(parent);
     }
@@ -21,32 +22,36 @@ public class AllArtistsPane extends ChildPane {
     void addChildren() {
         super.addChildren();
 
-        TableView table = new TableView();
+        ArrayList<String> artistNames = App.dbConn.getArtistNames();
+        ComboBox<String> artistNamesComboBox = new ComboBox<>(FXCollections.observableArrayList(artistNames));
 
-        ArrayList<Artist> artists = new ArrayList<>();
-
-        try {
-            ResultSet rs = App.dbConn.selectAllArtists();
-            ResultSetMetaData metaData = rs.getMetaData();
-
-            for (int i = 1; i < metaData.getColumnCount() + 1; i++) {
-                String colName = metaData.getColumnName(i);
-                TableColumn col = new TableColumn<>(colName);
-                col.setCellValueFactory(new PropertyValueFactory<Song, String>(colName));
-                table.getColumns().add(col);
+        artistNamesComboBox.setOnAction(actionEvent -> {
+            if (this.table != null) {
+                root.getChildren().remove(this.table);
             }
+            createArtistsTable(artistNamesComboBox.getValue());
+            root.getChildren().add(table);
+        });
 
-            while (rs.next()) {
-                artists.add(new Artist(
-                        rs.getString("artistName")
-                ));
-            }
+        root.getChildren().add(artistNamesComboBox);
+    }
 
-            table.setItems(FXCollections.observableArrayList(artists));
-        } catch (SQLException e) {
-            System.out.println("Select all songs error");
+    void createArtistsTable(String artistName) {
+        this.table = new TableView<>();
+
+        List<String> colNames = new ArrayList<>();
+        Field[] fields = Song.class.getDeclaredFields();
+        for (Field field: fields) {
+            colNames.add(field.getName());
         }
 
-        root.getChildren().add(table);
+        colNames.forEach(colName -> {
+            TableColumn col = new TableColumn<>(colName);
+            col.setCellValueFactory(new PropertyValueFactory<Song, String>(colName));
+            table.getColumns().add(col);
+        });
+
+        ArrayList<Song> artistSongs = App.dbConn.selectSongsByArtist(artistName);
+        table.setItems(FXCollections.observableArrayList(artistSongs));
     }
 }

@@ -11,7 +11,7 @@ public class ArtistsPane extends Pane {
         super.addChildren();
 
         Button findArtistButton = new Button("Find artist by name");
-        Button showAllArtistsButton = new Button("Show all artists");
+        Button showAllArtistsButton = new Button("Show all songs by artist");
         showAllArtistsButton.setOnAction(actionEvent -> showPane(new AllArtistsPane(this).root));
 
         root.getChildren().addAll(findArtistButton, showAllArtistsButton);

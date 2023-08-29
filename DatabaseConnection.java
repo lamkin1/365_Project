@@ -41,7 +41,34 @@ public class DatabaseConnection {
         return null;
     }
 
-    public Song selectSongByTitle(String title) {
+    public Song findSong(String songTitle, String artist) {
+        try {
+            String selectString = "SELECT * FROM Songs WHERE songTitle = ? AND artist = ?";
+            PreparedStatement selectStmt = connection.prepareStatement(selectString);
+            selectStmt.setString(1, songTitle);
+            selectStmt.setString(2, artist);
+
+            ResultSet rs = selectStmt.executeQuery();
+            if (rs.next()) {
+                String album = rs.getString("album");
+                int duration = rs.getInt("duration");
+                String genre = rs.getString("genre");
+                String era = rs.getString("era");
+                return new Song(songTitle, artist, album, duration, genre, era);
+            } else {
+                System.out.println("No song found for: " + songTitle +  "and " + artist + " !");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error selecting songs by title");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public ArrayList<Song> selectSongsByTitle(String title) {
+        ArrayList<Song> songs = new ArrayList<>();
+
         try {
             String selectString = "SELECT * FROM Songs WHERE songTitle = ?";
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
@@ -53,23 +80,144 @@ public class DatabaseConnection {
                 int duration = rs.getInt("duration");
                 String genre = rs.getString("genre");
                 String era = rs.getString("era");
-                return new Song(title, artist, album, duration, genre, era);
+                songs.add(new Song(title, artist, album, duration, genre, era));
             } else {
                 System.out.println("No song found for: " + title + "!");
+            }
+            selectStmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error selecting songs by title");
+            e.printStackTrace();
+        }
+
+        return songs;
+    }
+
+    public ArrayList<Song> selectSongsByArtistAndAlbum(String artist, String album) {
+        ArrayList<Song> songs = new ArrayList<>();
+
+        try {
+            String selectString = "SELECT * FROM Songs WHERE artist = ? AND album = ?";
+            PreparedStatement selectStmt = connection.prepareStatement(selectString);
+            selectStmt.setString(1, artist);
+            selectStmt.setString(2, album);
+            ResultSet rs = selectStmt.executeQuery();
+
+            while (rs.next()) {
+                String songTitle = rs.getString("songTitle");
+                int duration = rs.getInt("duration");
+                String genre = rs.getString("genre");
+                String era = rs.getString("era");
+                songs.add(new Song(songTitle, artist, album, duration, genre, era));
             }
             selectStmt.close();
         } catch (SQLException e) {
             System.out.println("Error selecting song by title");
             e.printStackTrace();
         }
-        return null;
+
+        return songs;
     }
+
+    public ArrayList<Song> selectSongsByArtist(String artist) {
+        ArrayList<Song> songs = new ArrayList<>();
+
+        try {
+            String selectString = "SELECT * FROM Songs WHERE artist = ?";
+            PreparedStatement selectStmt = connection.prepareStatement(selectString);
+            selectStmt.setString(1, artist);
+            ResultSet rs = selectStmt.executeQuery();
+            while (rs.next()) {
+                String songTitle = rs.getString("songTitle");
+                String album = rs.getString("album");
+                int duration = rs.getInt("duration");
+                String genre = rs.getString("genre");
+                String era = rs.getString("era");
+                songs.add(new Song(songTitle, artist, album, duration, genre, era));
+            }
+            selectStmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error selecting song by title");
+            e.printStackTrace();
+        }
+
+        return songs;
+    }
+
+    public ArrayList<Song> selectSongsByGenre(String genre) {
+        ArrayList<Song> songs = new ArrayList<>();
+
+        try {
+            String selectString = "SELECT * FROM Songs WHERE genre = ?";
+            PreparedStatement selectStmt = connection.prepareStatement(selectString);
+            selectStmt.setString(1, genre);
+            ResultSet rs = selectStmt.executeQuery();
+            while (rs.next()) {
+                String songTitle = rs.getString("songTitle");
+                String album = rs.getString("album");
+                int duration = rs.getInt("duration");
+                String artist = rs.getString("artist");
+                String era = rs.getString("era");
+                songs.add(new Song(songTitle, artist, album, duration, genre, era));
+            }
+            selectStmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error selecting song by genre");
+            e.printStackTrace();
+        }
+
+        return songs;
+    }
+
+    public ArrayList<String> selectAllAlbumsByArtist(String artist) {
+        ArrayList<String> albums = new ArrayList<>();
+
+        try {
+            String selectString = "SELECT * FROM Albums WHERE artist = ?";
+            PreparedStatement selectStmt = connection.prepareStatement(selectString);
+            selectStmt.setString(1, artist);
+            ResultSet rs = selectStmt.executeQuery();
+            while (rs.next()) {
+                String albumName = rs.getString("albumName");
+                albums.add(albumName);
+            }
+            selectStmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error selecting album by artist " + artist);
+            e.printStackTrace();
+        }
+
+        return albums;
+    }
+
+    public ArrayList<String> selectAllArtistsByAlbum(String albumName) {
+        ArrayList<String> artists = new ArrayList<>();
+
+        try {
+            String selectString = "SELECT * FROM Albums WHERE albumName = ?";
+            PreparedStatement selectStmt = connection.prepareStatement(selectString);
+            selectStmt.setString(1, albumName);
+            ResultSet rs = selectStmt.executeQuery();
+            while (rs.next()) {
+                String artist = rs.getString("artist");
+                artists.add(artist);
+            }
+            selectStmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error selecting album by album " + albumName);
+            e.printStackTrace();
+        }
+
+        return artists;
+    }
+
+
 
     public ResultSet selectAllSongs() throws SQLException {
         PreparedStatement selectStmt = connection.prepareStatement("SELECT * FROM Songs");
         return selectStmt.executeQuery();
     }
-    
+
     public ResultSet selectAllPlaylistSongs() throws SQLException {
         PreparedStatement selectStmt = connection.prepareStatement("SELECT * FROM PlaylistSongs ORDER BY playlist asc;");
         return selectStmt.executeQuery();
@@ -81,7 +229,7 @@ public class DatabaseConnection {
     }
     
     public ResultSet selectAllAlbums() throws SQLException {
-        PreparedStatement selectStmt = connection.prepareStatement("SELECT album, artist, songTitle FROM Songs ORDER BY album asc;");
+        PreparedStatement selectStmt = connection.prepareStatement("SELECT * FROM Albums;");
         return selectStmt.executeQuery();
     }
     
@@ -171,7 +319,7 @@ public class DatabaseConnection {
     
     //JAMES
     public void updateSong(Song oldSong, Song newSong) {
-        //find old song by selectSongByTitle(oldSong.getTitle());
+        //find old song by selectSongsByTitle(oldSong.getTitle());
         //write update SQL statement to replace all fields with new song fields
     }
     public void updateArtist(Artist oldArtist, Artist newArtist) {
@@ -185,7 +333,6 @@ public class DatabaseConnection {
         ArrayList<String> playlistNames = new ArrayList<>();
         try {
             ResultSet rs = this.selectAllPlaylists();
-
             while (rs.next()) {
                 playlistNames.add(rs.getString("playlistName"));
             }
@@ -195,20 +342,60 @@ public class DatabaseConnection {
         return playlistNames;
     }
 
-    public ArrayList<Song> getTracklistFromPlaylist(String name) {
+    public ArrayList<String> getGenreNames() {
+        ArrayList<String> genreNames = new ArrayList<>();
+        try {
+            ResultSet rs = this.selectAllGenres();
+
+            while (rs.next()) {
+                genreNames.add(rs.getString("genreName"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Select genre names error");
+        }
+        return genreNames;
+    }
+
+    public ArrayList<String> getArtistNames() {
+        ArrayList<String> artistNames = new ArrayList<>();
+        try {
+            ResultSet rs = this.selectAllArtists();
+
+            while (rs.next()) {
+                artistNames.add(rs.getString("artistName"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Select all artist names error");
+        }
+        return artistNames;
+    }
+
+    public ArrayList<String> getAlbumNames() {
+        ArrayList<String> albumNames = new ArrayList<>();
+        try {
+            ResultSet rs = this.selectAllAlbums();
+
+            while (rs.next()) {
+                albumNames.add(rs.getString("albumName"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Select all album names error");
+        }
+        return albumNames;
+    }
+
+    public ArrayList<Song> getTracklistFromPlaylist(String playlist) {
         try {
             ArrayList<Song> tracklist = new ArrayList();
             String selectString = "SELECT * FROM PlaylistSongs WHERE playlist = ?";
             PreparedStatement selectStmt = connection.prepareStatement(selectString);
-            selectStmt.setString(1, name);
+            selectStmt.setString(1, playlist);
             ResultSet rs = selectStmt.executeQuery();
-            if (!rs.next()) {
-                System.out.println("No songs in playlist: " + name + "!");
-            }
             while (rs.next()) {
-                Song songToAdd = selectSongByTitle(rs.getString("song"));
+                Song songToAdd = findSong(rs.getString("song"), rs.getString("artist"));
                 tracklist.add(songToAdd);
             }
+            selectStmt.close();
             return tracklist;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -227,8 +414,7 @@ public class DatabaseConnection {
                 System.out.println("No playlist found for: " + name + "!");
             }
             while (rs.next()) {
-                //rs.getString("song");
-                Song songToAdd = selectSongByTitle(rs.getString("song"));
+                Song songToAdd = findSong(rs.getString("song"), rs.getString("artist"));
                 tracklist.add(songToAdd);
             }
             return tracklist;
@@ -363,23 +549,15 @@ public class DatabaseConnection {
         insertStmt.close();
     }
     
-    public boolean addSongToPlaylist(Song song, String playlistName) {
-        try {
-            String insertString = "INSERT INTO PlaylistSongs (playlist, song, artist) VALUES (?, ?, ?)";
-            PreparedStatement insertStmt = connection.prepareStatement(insertString);
-            checkPlaylist(playlistName);
-            insertStmt.setString(1, playlistName);
-            insertStmt.setString(2, song.getSongTitle());
-            insertStmt.setString(3, song.getArtist());
-            insertStmt.executeUpdate();
-            insertStmt.close();
-
-            return true;
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public void addSongToPlaylist(Song song, String playlistName) throws SQLException {
+        String insertString = "INSERT INTO PlaylistSongs (playlist, song, artist) VALUES (?, ?, ?)";
+        PreparedStatement insertStmt = connection.prepareStatement(insertString);
+        checkPlaylist(playlistName);
+        insertStmt.setString(1, playlistName);
+        insertStmt.setString(2, song.getSongTitle());
+        insertStmt.setString(3, song.getArtist());
+        insertStmt.executeUpdate();
+        insertStmt.close();
     }
 
     public void ensureArtist(String artist) throws SQLException {

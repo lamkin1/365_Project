@@ -9,7 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.lang.reflect.Field;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class AllPlaylistsPane extends ChildPane {
     }
 
     void createPlaylistTable(String playlistName) {
-        this.table = new TableView();
+        this.table = new TableView<>();
 
         List<String> colNames = new ArrayList<>();
         Field[] fields = Song.class.getDeclaredFields();

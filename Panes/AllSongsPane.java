@@ -21,8 +21,11 @@ public class AllSongsPane extends ChildPane {
     void addChildren() {
         super.addChildren();
 
+        Label statusLabel = new Label();
+
         TableView table = new TableView();
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        table.setStyle("-fx-selection-bar-non-focused: -fx-selection-bar;");
 
         ArrayList<Song> songs = new ArrayList<>();
 
@@ -64,9 +67,21 @@ public class AllSongsPane extends ChildPane {
             ObservableList<Song> selectedSongs = table.getSelectionModel().getSelectedItems();
             String playlistName = playlistComboBox.getValue();
 
-            selectedSongs.forEach(song -> {
-                App.dbConn.addSongToPlaylist(song, playlistName);
-            });
+            for (Song song: selectedSongs) {
+                try {
+                    App.dbConn.addSongToPlaylist(song, playlistName);
+                } catch (SQLException e) {
+                    if (e.getErrorCode() == 1062) {
+                    } else {
+                        statusLabel.setStyle("-fx-text-fill: red;");
+                        statusLabel.setText("An unknown error occured");
+                        break;
+                    }
+                }
+            }
+
+            statusLabel.setStyle("-fx-text-fill: green;");
+            statusLabel.setText("Added songs to playlist " + playlistName);
         });
 
         InputLabel titleInputLabel = new InputLabel("Title");
@@ -75,8 +90,6 @@ public class AllSongsPane extends ChildPane {
         InputLabel durationInputLabel = new InputLabel("Duration");
         InputLabel genreInputLabel = new InputLabel("Genre");
         InputLabel eraInputLabel = new InputLabel("Era");
-
-        Label statusLabel = new Label();
 
         root.getChildren().addAll(
                 table,
