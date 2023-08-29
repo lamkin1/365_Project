@@ -332,6 +332,8 @@ public class DatabaseConnection {
         selectStmt.setString(6, newSong.getEra());
         selectStmt.setString(7, oldSong.getSongTitle());
         selectStmt.setString(8, oldSong.getArtist());
+        selectStmt.executeQuery();
+        selectStmt.close();
     }
     public void updateArtist(Artist oldArtist, Artist newArtist) throws SQLException {
         Artist artist = selectArtistByName(oldArtist.getArtistName());
@@ -339,7 +341,7 @@ public class DatabaseConnection {
         PreparedStatement selectStmt = connection.prepareStatement("UPDATE Artists SET artist_name = ? WHERE artist_name = ?");
         selectStmt.setString(1, newArtist.getArtistName());
         selectStmt.setString(2, artist.getArtistName());
-        ResultSet rs = selectStmt.executeQuery();
+        selectStmt.executeQuery();
         selectStmt.close();
     }
     public void updateAlbum(Album oldAlbum, Album newAlbum) throws SQLException {
@@ -351,7 +353,7 @@ public class DatabaseConnection {
         selectStmt.setString(2, newAlbum.getArtist());
         selectStmt.setString(3, album.getAlbumName());
         selectStmt.setString(4, album.getArtist());
-        ResultSet rs = selectStmt.executeQuery();
+        selectStmt.executeQuery();
         selectStmt.close();
     }
 
