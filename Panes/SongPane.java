@@ -6,9 +6,6 @@ import javafx.scene.control.Button;
 public class SongPane extends Pane {
     public SongPane() {
         super();
-
-        root.setStyle("-fx-background-color: lightblue");
-        root.setAlignment(Pos.CENTER);
     }
 
     @Override

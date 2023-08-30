@@ -7,11 +7,24 @@ package com.mycompany.csc365p1;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.HashMap;
+
 /**
  *
  * @author seansponsler
  */
 public class Song {
+    public static HashMap<String, String> attributeTitles = new HashMap<>();
+
+    static {
+        attributeTitles.put("songTitle", "Title");
+        attributeTitles.put("artist", "Artist");
+        attributeTitles.put("album", "Album");
+        attributeTitles.put("duration", "Duration");
+        attributeTitles.put("genre", "Genre");
+        attributeTitles.put("era", "Era");
+    }
+
     private String songTitle;
     private String artist;
     private String album;
@@ -78,7 +91,13 @@ public class Song {
     public void setGenre(String newGenre) { this.genre = newGenre; }
     public void setEra(String newEra) { this.era = newEra; }
 
-    public boolean equals(Song song) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Song song = (Song) o;
+
         return this.songTitle.equals(song.getSongTitle()) &&
                 this.artist.equals(song.getArtist()) &&
                 this.album.equals(song.getAlbum()) &&

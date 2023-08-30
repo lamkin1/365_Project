@@ -41,7 +41,8 @@ public class DatabaseConnection {
         return null;
     }
 
-    public ArrayList<Song> findSongs(String songTitle, String artist, String album, String duration, String genre, String era) throws SQLException {
+    public ArrayList<Song> findSongs(String songTitle, String artist, String album, String duration, String genre, String era) throws SQLException, NumberFormatException {
+        ArrayList<Song> songs = new ArrayList<>();
         ArrayList<String> selectStringParts = new ArrayList<>();
         ArrayList<Object> params = new ArrayList<>();
 
@@ -70,11 +71,11 @@ public class DatabaseConnection {
             params.add(era);
         }
 
+        if (params.isEmpty()) return songs;
+
         String selectString = String.join(" AND ", selectStringParts);
         selectString += ";";
         selectString = "SELECT * FROM Songs WHERE " + selectString;
-
-        ArrayList<Song> songs = new ArrayList<>();
 
         PreparedStatement selectStmt = connection.prepareStatement(selectString);
         for (int i = 0; i < params.size(); i++) {
@@ -109,6 +110,13 @@ public class DatabaseConnection {
         }
 
         return false;
+    }
+
+    public void deletePlaylist(String playlistName) throws SQLException {
+        String deleteString = "DELETE FROM Playlists WHERE playlistName = ?";
+        PreparedStatement deleteStmt = connection.prepareStatement(deleteString);
+        deleteStmt.setString(1, playlistName);
+        deleteStmt.executeUpdate();
     }
 
     public Song findSong(String songTitle, String artist) {

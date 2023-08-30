@@ -10,8 +10,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Callback;
 
 import java.sql.ResultSet;
@@ -23,26 +24,26 @@ public class AllSongsPane extends ChildPane {
     ObservableList<Song> observableSongs;
     AllSongsPane(SongPane parent) {
         super(parent);
-        VBox.setVgrow(root, Priority.ALWAYS);
     }
 
-    void populateTable(TableView table, Label statusLabel) {
+    void populateTable(TableView table, StatusLabel statusLabel) {
         ArrayList<Song> songs = new ArrayList<>();
 
         table.getColumns().clear();
+        table.getSelectionModel().clearSelection();
 
         try {
             ResultSet rs = App.dbConn.selectAllSongs();
             ResultSetMetaData metaData = rs.getMetaData();
 
             for (int i = 1; i < metaData.getColumnCount() + 1; i++) {
-                String colName = metaData.getColumnName(i);
-                TableColumn<Song, String> col = new TableColumn<>(colName);
-                col.setCellValueFactory(new PropertyValueFactory<>(colName));
+                String attrName = metaData.getColumnName(i);
+                TableColumn<Song, String> col = new TableColumn<>(Song.attributeTitles.get(attrName));
+                col.setCellValueFactory(new PropertyValueFactory<>(attrName));
 
                 col.setCellValueFactory(cellData -> {
                     Song song = cellData.getValue();
-                    StringProperty cellValue = song.getPropertyByName(colName);
+                    StringProperty cellValue = song.getPropertyByName(attrName);
                     return cellValue;
                 });
 
@@ -52,7 +53,7 @@ public class AllSongsPane extends ChildPane {
 
                     String newValue = event.getNewValue();
                     try {
-                        newSong.setPropertyByName(colName, newValue);
+                        newSong.setPropertyByName(attrName, newValue);
                         try {
                             App.dbConn.updateSong(oldSong, newSong);
 
@@ -63,16 +64,14 @@ public class AllSongsPane extends ChildPane {
                             oldSong.setGenre(newSong.getGenre());
                             oldSong.setEra(newSong.getEra());
 
-                            statusLabel.setStyle("-fx-text-fill: green;");
-                            statusLabel.setText("Updated song");
+                            statusLabel.confirm("Updated song");
                         } catch (SQLException e) {
                             e.printStackTrace();
-                            statusLabel.setStyle("-fx-text-fill: red;");
-                            statusLabel.setText("Error updating song");
+                            statusLabel.warn("Error updating song");
                         }
                     } catch (NumberFormatException e) {
-                        statusLabel.setStyle("-fx-text-fill: red;");
-                        statusLabel.setText("Invalid duration");
+                        statusLabel.warn("Invalid duration");
+                        populateTable(table, statusLabel);
                     }
                 });
 
@@ -81,7 +80,7 @@ public class AllSongsPane extends ChildPane {
                 table.getColumns().add(col);
             }
 
-            TableColumn<Song, Button> deleteCol = new TableColumn<>("Delete");
+            TableColumn<Song, Button> deleteCol = new TableColumn<>();
             deleteCol.setCellFactory(new Callback<>() {
                 @Override
                 public TableCell<Song, Button> call(TableColumn<Song, Button> songStringTableColumn) {
@@ -93,10 +92,9 @@ public class AllSongsPane extends ChildPane {
                                 if (App.dbConn.deleteSong(song)) {
                                     observableSongs.remove(song);
                                     table.refresh();
-                                    statusLabel.setStyle("-fx-text-fill: green;");
-                                    statusLabel.setText("Deleted song!");
+                                    statusLabel.confirm("Deleted song!");
                                 } else {
-                                    statusLabel.setText("An error occured while deleting song");
+                                    statusLabel.warn("An error occured while deleting song");
                                 }
                             });
                         }
@@ -132,8 +130,7 @@ public class AllSongsPane extends ChildPane {
             table.getSelectionModel().getSelectedIndices().addListener((ListChangeListener) observable -> {
                 int numSelectedRows = table.getSelectionModel().getSelectedItems().size();
                 if (numSelectedRows > 0) {
-                    statusLabel.setStyle("-fx-text-fill: green;");
-                    statusLabel.setText(numSelectedRows + " selected row(s)");
+                    statusLabel.confirm(numSelectedRows + " selected song(s)");
                 }
             });
         } catch (SQLException e) {
@@ -145,7 +142,8 @@ public class AllSongsPane extends ChildPane {
     void addChildren() {
         super.addChildren();
 
-        Label statusLabel = new Label();
+        StatusLabel statusLabel = new StatusLabel();
+        statusLabel.label.setFont(new Font(14));
 
         TableView table = new TableView();
         table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
@@ -155,6 +153,11 @@ public class AllSongsPane extends ChildPane {
 
         populateTable(table, statusLabel);
 
+        VBox findInputsVBox = new VBox();
+        findInputsVBox.setAlignment(Pos.CENTER);
+
+        Label filterSongLabel = new Label("Filter song(s)");
+
         InputLabel titleInputLabel = new InputLabel("Title");
         InputLabel artistInputLabel = new InputLabel("Artist");
         InputLabel albumInputLabel = new InputLabel("Album");
@@ -162,10 +165,22 @@ public class AllSongsPane extends ChildPane {
         InputLabel genreInputLabel = new InputLabel("Genre");
         InputLabel eraInputLabel = new InputLabel("Era");
 
-        VBox findSongVBox = new VBox();
+        findInputsVBox.getChildren().addAll(
+                filterSongLabel,
+                titleInputLabel.root,
+                artistInputLabel.root,
+                albumInputLabel.root,
+                durationInputLabel.root,
+                genreInputLabel.root,
+                eraInputLabel.root
+        );
 
-        Button findSongButton = new Button("Find song(s)");
+        HBox findSongHBox = new HBox();
+        findSongHBox.setSpacing(10);
+
+        Button findSongButton = new Button("Find");
         findSongButton.setOnAction(actionEvent -> {
+
             String title = titleInputLabel.getText();
             String artist = artistInputLabel.getText();
             String album = albumInputLabel.getText();
@@ -173,38 +188,55 @@ public class AllSongsPane extends ChildPane {
             String genre = genreInputLabel.getText();
             String era = eraInputLabel.getText();
 
+            if (title == null && artist == null && album == null && duration == null && genre == null && era == null) {
+                populateTable(table, statusLabel);
+                return;
+            }
+
             try {
-                ArrayList<Integer> tableIndices = new ArrayList<>();
                 ArrayList<Song> foundSongs = App.dbConn.findSongs(title, artist, album, duration, genre, era);
-                for (Song song: foundSongs) {
-                    for (int i = 0; i < observableSongs.size(); i++) {
-                        if (observableSongs.get(i).equals(song)) {
-                            tableIndices.add(i);
-                            break;
-                        }
+                ArrayList<Song> observableSongsToRemove = new ArrayList<>();
+
+                if (foundSongs.isEmpty()) {
+                    statusLabel.warn("No songs found");
+                    return;
+                }
+
+                populateTable(table, statusLabel);
+
+                for (Song song: observableSongs) {
+                    if (!foundSongs.contains(song)) {
+                        observableSongsToRemove.add(song);
                     }
                 }
 
-                table.getSelectionModel().clearSelection();
+                observableSongs.removeIf(observableSongsToRemove::contains);
 
-                if (tableIndices.isEmpty()) {
-                    statusLabel.setStyle("-fx-text-fill: red;");
-                    statusLabel.setText("No songs found");
-                }
-
-                for (Integer tableIndex: tableIndices) {
-                    table.getSelectionModel().selectIndices(tableIndex);
-                }
+                table.getSelectionModel().selectAll();
+                table.refresh();
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                statusLabel.setStyle("-fx-text-fill: red;");
-                statusLabel.setText("An unknown error occured");
+                statusLabel.warn("An unknown error occured");
+            } catch (NumberFormatException e) {
+                statusLabel.warn("Duration must be an integer");
             }
         });
 
-        findSongVBox.getChildren().add(findSongButton);
-        findSongVBox.setAlignment(Pos.CENTER);
+        Button clearFiltersButton = new Button("Clear filters");
+        clearFiltersButton.setOnAction(actionEvent -> {
+            titleInputLabel.textField.setText("");
+            artistInputLabel.textField.setText("");
+            albumInputLabel.textField.setText("");
+            durationInputLabel.textField.setText("");
+            genreInputLabel.textField.setText("");
+            eraInputLabel.textField.setText("");
+            populateTable(table, statusLabel);
+            statusLabel.confirm("");
+        });
+
+        findSongHBox.getChildren().addAll(findSongButton, clearFiltersButton);
+        findSongHBox.setAlignment(Pos.CENTER);
 
         VBox playlistVBox = new VBox();
 
@@ -215,23 +247,41 @@ public class AllSongsPane extends ChildPane {
         Button addSongToPlaylistButton = new Button("Add selected song(s) to playlist");
         addSongToPlaylistButton.setOnAction(actionEvent -> {
             ObservableList<Song> selectedSongs = table.getSelectionModel().getSelectedItems();
+            if (selectedSongs.isEmpty()) {
+                statusLabel.warn("No songs selected");
+                return;
+            }
+
             String playlistName = playlistComboBox.getValue();
+            if (playlistName == null) {
+                statusLabel.warn("No playlist selected");
+                return;
+            }
+
+            ArrayList<Song> songsAlreadyInPlaylist = new ArrayList<>();
 
             for (Song song: selectedSongs) {
                 try {
                     App.dbConn.addSongToPlaylist(song, playlistName);
                 } catch (SQLException e) {
                     if (e.getErrorCode() == 1062) {
+                        songsAlreadyInPlaylist.add(song);
                     } else {
-                        statusLabel.setStyle("-fx-text-fill: red;");
-                        statusLabel.setText("An unknown error occured");
+                        statusLabel.warn("An unknown error occured");
                         break;
                     }
                 }
             }
 
-            statusLabel.setStyle("-fx-text-fill: green;");
-            statusLabel.setText("Added songs to playlist " + playlistName);
+            int numSongsAdded = selectedSongs.size() - songsAlreadyInPlaylist.size();
+
+            if (songsAlreadyInPlaylist.size() == selectedSongs.size()) {
+                statusLabel.warn("Song(s) already in playlist");
+            } else if (songsAlreadyInPlaylist.isEmpty()) {
+                statusLabel.confirm("Added " + selectedSongs.size() + " songs(s) to playlist " + playlistName);
+            } else {
+                statusLabel.confirm("Added " + numSongsAdded + "/" + selectedSongs.size() + " new song(s) to playlist " + playlistName);
+            }
         });
 
         playlistVBox.getChildren().addAll(addSongToPlaylistButton, playlistComboBox);
@@ -240,14 +290,9 @@ public class AllSongsPane extends ChildPane {
         root.getChildren().addAll(
                 table,
                 playlistVBox,
-                titleInputLabel.root,
-                artistInputLabel.root,
-                albumInputLabel.root,
-                durationInputLabel.root,
-                genreInputLabel.root,
-                eraInputLabel.root,
-                findSongVBox,
-                statusLabel
+                findInputsVBox,
+                findSongHBox,
+                statusLabel.getRoot()
         );
     }
 }

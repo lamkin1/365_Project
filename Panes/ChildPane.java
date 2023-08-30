@@ -2,6 +2,7 @@ package com.mycompany.csc365p1.Panes;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class ChildPane {
@@ -13,6 +14,8 @@ public class ChildPane {
 
         root = new VBox();
         root.setAlignment(Pos.TOP_LEFT);
+        root.setSpacing(10);
+        VBox.setVgrow(root, Priority.ALWAYS);
 
         addChildren();
     }

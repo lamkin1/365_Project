@@ -8,8 +8,10 @@ public class Pane {
 
     protected Pane() {
         root = new VBox();
-        root.setAlignment(Pos.TOP_CENTER);
+        root.setAlignment(Pos.CENTER);
         root.setFillWidth(true);
+        root.setStyle("-fx-background-color: lightblue");
+        root.setSpacing(10);
 
         addChildren();
     }

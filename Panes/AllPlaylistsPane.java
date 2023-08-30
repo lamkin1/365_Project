@@ -3,17 +3,20 @@ package com.mycompany.csc365p1.Panes;
 import com.mycompany.csc365p1.App;
 import com.mycompany.csc365p1.Song;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 
 import java.lang.reflect.Field;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AllPlaylistsPane extends ChildPane {
-    TableView table;
     AllPlaylistsPane(PlaylistPane parent) {
         super(parent);
     }
@@ -22,33 +25,57 @@ public class AllPlaylistsPane extends ChildPane {
     void addChildren() {
         super.addChildren();
 
+        TableView table = new TableView<>();
+
+        StatusLabel statusLabel = new StatusLabel();
+
         ArrayList<String> playlistNames = App.dbConn.getPlaylistNames();
-        ComboBox<String> playlistComboBox = new ComboBox<>(FXCollections.observableArrayList(playlistNames));
-        playlistComboBox.setOnAction(actionEvent -> {
-            if (this.table != null) {
-                root.getChildren().remove(this.table);
+
+        HBox inputsHBox = new HBox();
+        inputsHBox.setAlignment(Pos.CENTER);
+        inputsHBox.setSpacing(10);
+
+        ObservableList<String> observablePlaylistNames = FXCollections.observableArrayList(playlistNames);
+        ComboBox<String> playlistComboBox = new ComboBox<>(observablePlaylistNames);
+        playlistComboBox.setOnAction(actionEvent -> populateTable(table, playlistComboBox.getValue()));
+
+        Button deletePlaylistButton = new Button("Delete playlist");
+        deletePlaylistButton.setOnAction(actionEvent -> {
+            try {
+                String playlistName = playlistComboBox.getValue();
+                App.dbConn.deletePlaylist(playlistName);
+                observablePlaylistNames.remove(playlistName);
+                statusLabel.confirm("Deleted playlist " + playlistName);
+                populateTable(table, null);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            createPlaylistTable(playlistComboBox.getValue());
-            root.getChildren().add(table);
         });
 
-        root.getChildren().add(playlistComboBox);
+        inputsHBox.getChildren().addAll(playlistComboBox, deletePlaylistButton);
+
+        root.getChildren().addAll(inputsHBox, table, statusLabel.getRoot());
     }
 
-    void createPlaylistTable(String playlistName) {
-        this.table = new TableView<>();
+    void populateTable(TableView table, String playlistName) {
+        table.getColumns().clear();
 
-        List<String> colNames = new ArrayList<>();
         Field[] fields = Song.class.getDeclaredFields();
+        ArrayList<Field> nonStaticFields = new ArrayList<>();
+
         for (Field field: fields) {
-            colNames.add(field.getName());
+            if (!java.lang.reflect.Modifier.isStatic(field.getModifiers())) {
+                nonStaticFields.add(field);
+            }
         }
 
-        colNames.forEach(colName -> {
-            TableColumn col = new TableColumn<>(colName);
+        for (Field field: nonStaticFields) {
+            String colName = field.getName();
+            String attrName = Song.attributeTitles.get(colName);
+            TableColumn col = new TableColumn<>(attrName);
             col.setCellValueFactory(new PropertyValueFactory<Song, String>(colName));
             table.getColumns().add(col);
-        });
+        }
 
         ArrayList<Song> playlistSongs = App.dbConn.getTracklistFromPlaylist(playlistName);
         table.setItems(FXCollections.observableArrayList(playlistSongs));

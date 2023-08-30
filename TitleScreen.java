@@ -30,31 +30,13 @@ class TitleScreen {
         SongPane songPane = new SongPane();
         songsTab.setContent(songPane.getRoot());
 
-        Tab artistsTab = new Tab("Artists");
-        artistsTab.setClosable(false);
-
-        Tab albumsTab = new Tab("Albums");
-        albumsTab.setClosable(false);
-
-        AlbumPane albumPane = new AlbumPane();
-        albumsTab.setContent(albumPane.getRoot());
-
-        ArtistsPane artistsPane = new ArtistsPane();
-        artistsTab.setContent(artistsPane.getRoot());
-
-        Tab genresTab = new Tab("Genres");
-        genresTab.setClosable(false);
-
-        GenrePane genrePane = new GenrePane();
-        genresTab.setContent(genrePane.getRoot());
-
         Tab playlistsTab = new Tab("Playlists");
         playlistsTab.setClosable(false);
 
         PlaylistPane playlistPane = new PlaylistPane();
         playlistsTab.setContent(playlistPane.getRoot());
 
-        tabPane.getTabs().addAll(songsTab, artistsTab, albumsTab, genresTab, playlistsTab);
+        tabPane.getTabs().addAll(songsTab, playlistsTab);
 
         root.getChildren().addAll(tabPane);
     }
