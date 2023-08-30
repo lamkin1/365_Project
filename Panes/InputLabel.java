@@ -28,7 +28,7 @@ public class InputLabel {
     }
 
     public String getText() {
-        return this.textField.getText();
+        return this.textField.getText().isEmpty() ? null : this.textField.getText();
     }
     public HBox getRoot() {
         return root;

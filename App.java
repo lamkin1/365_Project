@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-    final int WIDTH = 1000;
+    final int WIDTH = 1200;
     final int HEIGHT = 800;
 
     public static DatabaseConnection dbConn;

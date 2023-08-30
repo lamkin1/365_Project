@@ -41,6 +41,76 @@ public class DatabaseConnection {
         return null;
     }
 
+    public ArrayList<Song> findSongs(String songTitle, String artist, String album, String duration, String genre, String era) throws SQLException {
+        ArrayList<String> selectStringParts = new ArrayList<>();
+        ArrayList<Object> params = new ArrayList<>();
+
+        if (songTitle != null) {
+            selectStringParts.add("songTitle = ?");
+            params.add(songTitle);
+        }
+        if (artist != null) {
+            selectStringParts.add("artist = ?");
+            params.add(artist);
+        }
+        if (album != null) {
+            selectStringParts.add("album = ?");
+            params.add(album);
+        }
+        if (duration != null) {
+            selectStringParts.add("duration = ?");
+            params.add(Integer.parseInt(duration));
+        }
+        if (genre != null) {
+            selectStringParts.add("genre = ?");
+            params.add(genre);
+        }
+        if (era != null) {
+            selectStringParts.add("era = ?");
+            params.add(era);
+        }
+
+        String selectString = String.join(" AND ", selectStringParts);
+        selectString += ";";
+        selectString = "SELECT * FROM Songs WHERE " + selectString;
+
+        ArrayList<Song> songs = new ArrayList<>();
+
+        PreparedStatement selectStmt = connection.prepareStatement(selectString);
+        for (int i = 0; i < params.size(); i++) {
+            selectStmt.setObject(i + 1, params.get(i));
+        }
+
+        ResultSet rs = selectStmt.executeQuery();
+        while (rs.next()) {
+            String foundTitle = rs.getString("songTitle");
+            String foundArtist = rs.getString("artist");
+            String foundAlbum = rs.getString("album");
+            int foundDuration = rs.getInt("duration");
+            String foundGenre = rs.getString("genre");
+            String foundEra = rs.getString("era");
+            songs.add(new Song(foundTitle, foundArtist, foundAlbum, foundDuration, foundGenre, foundEra));
+        }
+
+        return songs;
+    }
+
+    public boolean deleteSong(Song song) {
+        try {
+            String deleteString = "DELETE FROM Songs WHERE songTitle = ? AND artist = ?";
+            PreparedStatement deleteStmt = connection.prepareStatement(deleteString);
+            deleteStmt.setString(1, song.getSongTitle());
+            deleteStmt.setString(2, song.getArtist());
+            deleteStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error deleting song");
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public Song findSong(String songTitle, String artist) {
         try {
             String selectString = "SELECT * FROM Songs WHERE songTitle = ? AND artist = ?";
@@ -319,11 +389,12 @@ public class DatabaseConnection {
     
     //JAMES
     public void updateSong(Song oldSong, Song newSong) throws SQLException {
-        //find old song by selectSongsByTitle(oldSong.getTitle());
-        //write update SQL statement to replace all fields with new song fields
-        ArrayList<Song> songs = selectSongsByTitle(oldSong.getSongTitle());
-        ensureSongIntegrityConstraints(newSong.getArtist(), newSong.getAlbum(), newSong.getGenre(), newSong.getEra());
-        PreparedStatement selectStmt = connection.prepareStatement("UPDATE Songs SET song_title = ?, artist = ?, album = ?, duration = ?, genre = ?, era = ? WHERE song_title = ? and artist = ?");
+        if (!ensureSongIntegrityConstraints(newSong.getArtist(), newSong.getAlbum(), newSong.getGenre(), newSong.getEra())) {
+            System.out.println("Insert song integrity constraints not met when updating song");
+            return;
+        }
+
+        PreparedStatement selectStmt = connection.prepareStatement("UPDATE Songs SET songTitle = ?, artist = ?, album = ?, duration = ?, genre = ?, era = ? WHERE songTitle = ? and artist = ?;");
         selectStmt.setString(1, newSong.getSongTitle());
         selectStmt.setString(2, newSong.getArtist());
         selectStmt.setString(3, newSong.getAlbum());
@@ -332,7 +403,7 @@ public class DatabaseConnection {
         selectStmt.setString(6, newSong.getEra());
         selectStmt.setString(7, oldSong.getSongTitle());
         selectStmt.setString(8, oldSong.getArtist());
-        selectStmt.executeQuery();
+        selectStmt.executeUpdate();
         selectStmt.close();
     }
     public void updateArtist(Artist oldArtist, Artist newArtist) throws SQLException {

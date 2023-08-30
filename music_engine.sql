@@ -17,7 +17,7 @@ CREATE TABLE Albums (
     albumName varchar(60) NOT NULL,
     artist varchar(60) NOT NULL,
     PRIMARY KEY (albumName, artist),
-    FOREIGN KEY(artist) REFERENCES Artists(artistName) ON UPDATE CASCADE
+    FOREIGN KEY(artist) REFERENCES Artists(artistName) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Songs (
@@ -27,10 +27,10 @@ CREATE TABLE Songs (
     duration INT NOT NULL,
     genre varchar(60) NOT NULL,
     era varchar(60) NOT NULL,
-    FOREIGN KEY (artist) REFERENCES Artists(artistName) ON UPDATE CASCADE,
-    FOREIGN KEY (album) REFERENCES Albums(albumName) ON UPDATE CASCADE,
-    FOREIGN KEY (genre) REFERENCES Genres(genreName) ON UPDATE CASCADE,
-    FOREIGN KEY (era) REFERENCES Eras(era) ON UPDATE CASCADE,
+    FOREIGN KEY (artist) REFERENCES Artists(artistName) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (album) REFERENCES Albums(albumName) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (genre) REFERENCES Genres(genreName) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (era) REFERENCES Eras(era) ON UPDATE CASCADE ON DELETE CASCADE,
     PRIMARY KEY (songTitle, artist) 
 );
 
@@ -45,9 +45,9 @@ CREATE TABLE PlaylistSongs (
     song varchar(60) NOT NULL,
     artist varchar(60) NOT NULL,
     PRIMARY KEY (playlist, song, artist),
-    FOREIGN KEY(playlist) REFERENCES Playlists(playlistName) ON UPDATE CASCADE,
-    FOREIGN KEY(song) REFERENCES Songs(songTitle) ON UPDATE CASCADE,
-    FOREIGN KEY(artist) REFERENCES Songs(artist) ON UPDATE CASCADE
+    FOREIGN KEY(playlist) REFERENCES Playlists(playlistName) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(song) REFERENCES Songs(songTitle) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(artist) REFERENCES Songs(artist) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 ALTER TABLE Songs
