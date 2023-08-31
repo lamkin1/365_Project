@@ -43,7 +43,7 @@ public class AllPlaylistsPane extends ChildPane {
         deletePlaylistButton.setOnAction(actionEvent -> {
             try {
                 String playlistName = playlistComboBox.getValue();
-                if (playlistName == null) {
+                if (playlistName == null || playlistName.isEmpty()) {
                     statusLabel.warn("No playlist selected");
                     return;
                 }
