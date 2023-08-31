@@ -24,6 +24,7 @@ public class ChildPane {
         root.getChildren().clear();
 
         Button returnButton = new Button("Return");
+        returnButton.getStyleClass().add("return-button");
         returnButton.setOnAction(actionEvent -> parent.addChildren());
         root.getChildren().add(returnButton);
     }

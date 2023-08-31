@@ -43,6 +43,11 @@ public class AllPlaylistsPane extends ChildPane {
         deletePlaylistButton.setOnAction(actionEvent -> {
             try {
                 String playlistName = playlistComboBox.getValue();
+                if (playlistName == null) {
+                    statusLabel.warn("No playlist selected");
+                    return;
+                }
+
                 App.dbConn.deletePlaylist(playlistName);
                 observablePlaylistNames.remove(playlistName);
                 statusLabel.confirm("Deleted playlist " + playlistName);

@@ -10,7 +10,7 @@ public class Pane {
         root = new VBox();
         root.setAlignment(Pos.CENTER);
         root.setFillWidth(true);
-        root.setStyle("-fx-background-color: lightblue");
+        root.setStyle("-fx-background-color: #dee3ea");
         root.setSpacing(10);
 
         addChildren();

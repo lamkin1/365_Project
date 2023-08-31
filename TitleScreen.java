@@ -24,6 +24,12 @@ class TitleScreen {
 
         TabPane tabPane = new TabPane();
 
+        Tab homeTab = new Tab("Home");
+        homeTab.setClosable(false);
+
+        HomePane homePane = new HomePane(tabPane);
+        homeTab.setContent(homePane.getRoot());
+
         Tab songsTab = new Tab("Songs");
         songsTab.setClosable(false);
 
@@ -36,7 +42,7 @@ class TitleScreen {
         PlaylistPane playlistPane = new PlaylistPane();
         playlistsTab.setContent(playlistPane.getRoot());
 
-        tabPane.getTabs().addAll(songsTab, playlistsTab);
+        tabPane.getTabs().addAll(homeTab, songsTab, playlistsTab);
 
         root.getChildren().addAll(tabPane);
     }

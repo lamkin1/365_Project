@@ -1,0 +1,54 @@
+@font-face {
+    src: url("assets/BarlowCondensed-ExtraLight.ttf");
+}
+
+.button {
+    -fx-background-color: #ec446d;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #ec446d;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #fc658a;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+}
+
+.button:pressed {
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+}
+
+.return-button {
+    -fx-background-color: none;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-text-fill: black;
+    -fx-border-radius: 3px;
+}
+
+.return-button:hover {
+    -fx-background-color: none;
+}
+
+.home-pane .label {
+    -fx-font-family: "Barlow Condensed ExtraLight";
+    -fx-text-fill: #ec446d;
+}
+
+.home-pane .title-label {
+    -fx-font-size: 120px;
+}
+
+.home-pane .button {
+    -fx-font-size: 20px;
+}
+
+.table-cell {
+    -fx-alignment: CENTER;
+}

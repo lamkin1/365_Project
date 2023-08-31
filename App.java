@@ -27,10 +27,11 @@ public class App extends Application {
 
         stage.getIcons().add(icon);
 
-        stage.setTitle("Songs database");
+        stage.setTitle("Music Library");
 
         Scene scene = new Scene(titleScreen.getRoot(), WIDTH, HEIGHT);
         stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         stage.show();
 

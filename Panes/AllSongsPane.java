@@ -145,8 +145,7 @@ public class AllSongsPane extends ChildPane {
         StatusLabel statusLabel = new StatusLabel();
         statusLabel.label.setFont(new Font(14));
 
-        TableView table = new TableView();
-        table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        TableView table = new TableView<>();
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         table.setEditable(true);
         table.setStyle("-fx-selection-bar-non-focused: -fx-selection-bar;");
